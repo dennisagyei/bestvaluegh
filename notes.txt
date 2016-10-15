@@ -1,0 +1,10 @@
+MongoDB
+First, install MongoDB by running the following command from the Terminal:
+
+$ sudo apt-get install -y mongodb-org
+Then, from the terminal, run the following command to start Mongo:
+
+$ mongod --bind_ip=$IP --nojournal
+
+For repair work...
+$ mongod --repair

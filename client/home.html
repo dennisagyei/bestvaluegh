@@ -1,0 +1,220 @@
+<div class="row" ng-controller="HomeCtrl">
+	<div class="col-sm-3 sidebar">
+		<div class="bg-white shadow">
+			<div class="widget-menu">
+				<div class="cat-text"><input class="form-control" placeholder="Search" type="text"></div>
+
+                <!-- Sidebar navigation -->
+                <ul class="nav sidebar-nav">
+                  <li ng-repeat="kpi in kpi_stats">
+                    <a href="/compare/{{ kpi._id }}"><i class="ti-shine"></i>{{ kpi._id }}<span class="sidebar-badge">{{kpi.kpi_count }}</span></a>
+                  </li>
+                </ul>
+                <!-- Sidebar divider -->
+            </div>
+              <!-- /.widget -->
+		</div>		
+        <!-- /col 4 - sidebar -->
+	</div>
+
+    <div class="col-sm-9">
+		<div class="slider">
+		    <div class="row">
+            	<div id="grid-slider" class="flexslider" flexslider>
+              		<ul class="">
+              			<li>
+			                  <div class="col-sm-7 col-lg-7 omega">
+			                      <img class="bg-image entry-lg" src="images/banking2.jpg">
+			                      <div class="deal-short-entry">
+			                        <p class="lead">How much does your bank charge you for Account Maintenance? Compare with other banks...</p>
+			                      </div>
+			                    </img>
+			                  </div>
+			                  <div class="col-sm-5 col-lg-5 alpha entry-lg">
+			                    <div class="buyPanel animated fadeInLeft bg-white Aligner shadow">
+			                      <div class="content">
+			                        <div class="deal-content">
+			                          <h3>{{ kpi._id }}</h3>
+			                          <p>This is a monthy levy charged to the customer</p>
+			                        </div>
+			
+			                            <div class="price col-xs-12 text-center">
+											<h2 class="rating-num">5.0</h2>
+											<div class="rating">
+												<i class="ti-star"></i>
+												<i class="ti-star"></i>
+												<i class="ti-star"></i>
+												<i class="ti-star"></i>
+												<i class="ti-star"></i>
+											</div>
+											<div><i class="fa fa-trophy" aria-hidden="true"></i> Best Value</div>
+										</div>
+			
+			                        <div class="dealAttributes">
+			                          <div class="valueInfo bg-light shadow">
+			                            <div class="value">
+			                              <p class="value">Ghs 5.0</p>
+			                              <p class="text">Min</p>
+			                            </div>
+			                            <div class="discount">
+			                              <p class="value">Ghs 6.4</p>
+			                              <p class="text">Average</p>
+			                            </div>
+			                            <div class="save">
+			                              <p class="value">Ghs 8.0</p>
+			                              <p class="text">HIGHEST</p>
+			                            </div>
+			                          </div>
+			                          <!-- /.value info -->
+			                          <div class="timeLeft text-center buy-now">
+			                            <a class="btn btn-primary btn-raised ripple-effect">Compare Rates</a>
+			                          </div>
+			
+			                          <div class="social-sharing text-center" data-permalink="http://labs.carsonshold.com/social-sharing-buttons">
+			                            <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
+			                            <a target="_blank" href="http://www.facebook.com/sharer.php" class="share-facebook">
+			                              <span class="icon icon-facebook"></span>
+			                              <span class="share-title">Share</span>
+			                              <span class="share-count is-loaded">288</span>
+			                            </a>
+			                            <!-- https://dev.twitter.com/docs/intents -->
+			                            <a target="_blank" href="http://twitter.com/share?url=http://themeforest.net/user/codenpixel" class="share-twitter">
+			                              <span class="icon icon-twitter"></span>
+			                              <span class="share-title">Tweet</span>
+			                              <span class="share-count is-loaded">78</span>
+			                            </a>
+			
+			                          </div>
+			                          <!--/.social sharing -->
+			                        </div>
+			                      </div>
+			                    </div>
+			                    <!-- /#buypanel -->
+			                  </div>
+			                </li>
+              		</ul>
+              	</div>	
+			</div>
+	    </div>
+	    <!-- /slider -->
+	</div><!-- /.col -9  -->
+</div><!-- /.row -->
+      
+<section id="page" class="container">
+        <div class="shadow bg-white mTop-30 frameLR"></div>
+        <!--/.frame -->
+<div class="mTop-30">
+            <div class="row">
+              <div class="col-sm-12 clearfix">
+                <div class="hr-link">
+                  <hr class="mBtm-50" data-symbol="FEATURED RATES">
+                  <div class="view-all">
+                    <a href="index.html">
+                      VIEW ALL
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3" ng-repeat="x in kpi_featured">
+                <div class="deal-entry blue">
+                  <div class="image">
+                    <a href="#" target="_blank" title="#"><img src="images/{{ x._id.kpi_image}}" alt="#" class="img-responsive"></a>
+                  </div>
+                  <!-- /.image -->
+                  <div class="title">
+                    <a href="#" target="_blank" title="ATLETIKA 3 mēnešu abonements">{{ x._id.kpi_name }}</a>
+                  </div>
+                  <div class="entry-content">
+                    <div class="prices clearfix">
+                      <div class="procent"> {{ x.kpi_min }}</div>
+                      <div class="price"><b>{{ x.kpi_max }}</b></div>
+                    </div>
+                    <div class="row">
+					<div class="col-sm-6"><p><span class="label label-primary">Lowest Rate</span></p></div>
+					<div class="col-sm-6"><p><span class="label label-primary">Highest Rate</span></p></div>
+					</div>
+                   	<div>
+					
+                   	</div>
+                  </div>
+                  <!--/.entry content -->
+                  <footer class="info_bar clearfix">
+                        <a href="#" class="btn btn-block btn-primary btn-raised btn-sm">Compare Rates</a>
+                  </footer>
+                </div>
+              </div>
+              <!-- /.deal -->
+
+               
+
+
+          </div>
+          <!--/.row -->
+        </div>
+
+        <div class="mTop-30">
+		            <div class="row">
+		              <div class="col-sm-12 clearfix">
+		                <div class="hr-link">
+		                  <hr class="mBtm-50" data-symbol="FEATURED COMPANIES">
+		                  <div class="view-all">
+		                    <a href="index.html">
+		                      VIEW ALL
+		                    </a>
+		                  </div>
+		                </div>
+		              </div>
+            		</div>
+
+            		<div class="well-none">
+					            <div id="myCarousel" class="carousel slide">
+
+					                <!-- Carousel items -->
+					                <div class="carousel-inner">
+					                    <div class="item active">
+					                        <div class="row">
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/barclays_bank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/Ecobank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x"class="thumbnail"><img src="images/Energy_bank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/Fidelity-Bank-Logo_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                        </div>
+					                        <!--/row-->
+					                    </div>
+					                    <!--/item-->
+					                    <div class="item">
+					                        <div class="row">
+					                            <div class="col-sm-3 col-xs-6"><a href="#x col-xs-6" class="thumbnail"><img src="images/GN_bank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/UT_bank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/Zenith_bank_bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                            <div class="col-sm-3 col-xs-6"><a href="#x" class="thumbnail"><img src="images/standard-chartered-logo-bw.jpg" alt="Image" class="img-responsive"></a>
+					                            </div>
+					                        </div>
+					                        <!--/row-->
+					                    </div>
+
+					                </div>
+					                <!--/carousel-inner-->
+					                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-left fa-4"></i></a>
+
+					                <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-right fa-4"></i></a>
+					            </div>
+					            <!--/myCarousel-->
+					        </div>
+        				<!--/well-->
+						</div
+
+        <!--/.frame -->
+
+</section>
+
+
+      
