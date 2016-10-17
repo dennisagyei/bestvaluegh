@@ -3,6 +3,7 @@
 // grab the demo model we just created
 var Company = require('./models/company.js');
 var Kpi = require('./models/kpi.js');
+var Metric = require('./models/metric.js');
 
 module.exports = function(app) {
 
@@ -45,15 +46,26 @@ module.exports = function(app) {
         });
         
         app.get('/api/kpi/get_kpi_stats', function(req, res) {
-          Kpi.aggregate([
-                         //{ $match : { is_active : true } },  //Having clause
+          Metric.aggregate([
+                          //{ $unwind: "$kpi_metric" } ,
+                          { $match : { is_active : true } },  //Having clause
+                          
+                          {
+                              $lookup:
+                                {
+                                  from: "kpis",
+                                  localField: "kpi_id",
+                                  foreignField: "_id",
+                                  as: "kpi_metric"
+                                }
+                         },
                          {
                            $group:
                              {
-                               _id: "$kpi_name",
-                               kpi_avg: { $avg: "$kpi_value" },
-                               kpi_min: { $min: "$kpi_value" },
-                               kpi_max: { $max: "$kpi_value" },
+                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id", kpi_image: "$kpi_metric.kpi_image" },
+                               kpi_avg: { $avg: "$rate" },
+                               kpi_min: { $min: "$rate" },
+                               kpi_max: { $max: "$rate" },
                                kpi_count: { $sum: 1 }
                              }
                          }]).
@@ -69,16 +81,25 @@ module.exports = function(app) {
         });
         
         app.get('/api/kpi/get_featured_kpi', function(req, res) {
-          Kpi.aggregate([
+          Metric.aggregate([
                          //{ $match : { featured : true } },  //Having clause
-                         { $limit : 4 },
+                         //{ $limit : 4 },
+                         {
+                              $lookup:
+                                {
+                                  from: "kpis",
+                                  localField: "kpi_id",
+                                  foreignField: "_id",
+                                  as: "kpi_metric"
+                                }
+                         },
                          {
                            $group:
                              {
-                               _id: { kpi_name: "$kpi_name", kpi_image: "$kpi_image"},
-                               kpi_avg: { $avg: "$kpi_value" },
-                               kpi_min: { $min: "$kpi_value" },
-                               kpi_max: { $max: "$kpi_value" },
+                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id", kpi_image: "$kpi_metric.kpi_image" },
+                               kpi_avg: { $avg: "$rate" },
+                               kpi_min: { $min: "$rate" },
+                               kpi_max: { $max: "$rate" },
                                kpi_count: { $sum: 1 }
                              }
                          }]).
@@ -121,6 +142,52 @@ module.exports = function(app) {
         /* DELETE /todos/:id */
         app.delete('/api/kpi/:id', function(req, res, next) {
           Kpi.findByIdAndRemove(req.params.id, req.body, function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+        });
+        
+        //==============================Metrics KPIs================================
+        /* GET /todos listing. */
+        app.get('/api/metric', function(req, res) {
+          Metric.find(function (err, data) {
+            if (err){
+              res.send(err);
+            }else{
+              res.json(data);
+            }
+            
+          });
+        });
+        
+        /* POST /todos */
+        app.post('/api/metric', function(req, res, next) {
+          Metric.create(req.body, function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+        });
+        
+        /* GET /todos/id */
+        app.get('/api/metric/:id', function(req, res, next) {
+          Metric.findById(req.params.id, function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+        });
+        
+        /* PUT /todos/:id */
+        app.put('/api/metric/:id', function(req, res, next) {
+          Metric.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+        });
+        
+        // route to handle delete goes here (app.delete)
+        /* DELETE /todos/:id */
+        app.delete('/api/metric/:id', function(req, res, next) {
+          Metric.findByIdAndRemove(req.params.id, req.body, function (err, data) {
             if (err) return next(err);
             res.json(data);
           });
