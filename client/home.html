@@ -1,4 +1,5 @@
-<div class="row" ng-controller="HomeCtrl">
+<section id="page" class="container">
+	<div class="row" ng-controller="HomeCtrl">
 	<div class="col-sm-3 sidebar">
 		<div class="bg-white shadow">
 			<div class="widget-menu">
@@ -7,7 +8,7 @@
                 <!-- Sidebar navigation -->
                 <ul class="nav sidebar-nav">
                   <li ng-repeat="kpi in kpi_stats">
-                    <a href="/compare/{{ kpi._id }}"><i class="ti-shine"></i>{{ kpi._id }}<span class="sidebar-badge">{{kpi.kpi_count }}</span></a>
+                    <a href="/compare/{{ kpi._id.kpi_id }}"><i class="ti-shine"></i>{{ kpi._id.kpi_name }}<span class="sidebar-badge">{{kpi.kpi_count }}</span></a>
                   </li>
                 </ul>
                 <!-- Sidebar divider -->
@@ -117,19 +118,19 @@
               </div>
             </div>
 
-            <div class="col-sm-3" ng-repeat="x in kpi_featured">
+            <div class="col-md-3" ng-repeat="x in kpi_featured">
                 <div class="deal-entry blue">
                   <div class="image">
-                    <a href="#" target="_blank" title="#"><img src="images/{{ x._id.kpi_image}}" alt="#" class="img-responsive"></a>
+                    <a href="/compare/{{ x._id.kpi_id }}"  ><img src="images/{{ x._id.kpi_image}}" alt="#" class="img-responsive"></a>
                   </div>
                   <!-- /.image -->
                   <div class="title">
-                    <a href="#" target="_blank" title="ATLETIKA 3 mēnešu abonements">{{ x._id.kpi_name }}</a>
+                    <a href="/compare/{{ x._id.kpi_id }}" title="ATLETIKA 3 mēnešu abonements">{{ x._id.kpi_name }}</a>
                   </div>
                   <div class="entry-content">
                     <div class="prices clearfix">
-                      <div class="procent"> {{ x.kpi_min }}</div>
-                      <div class="price"><b>{{ x.kpi_max }}</b></div>
+                      <div class="procent"> {{ x.kpi_min | custNumFormat : x._id.kpi_type }}</div>
+                      <div class="price"><b>{{ x.kpi_max | custNumFormat : x._id.kpi_type }}</b></div>
                     </div>
                     <div class="row">
 					<div class="col-sm-6"><p><span class="label label-primary">Lowest Rate</span></p></div>
@@ -141,7 +142,7 @@
                   </div>
                   <!--/.entry content -->
                   <footer class="info_bar clearfix">
-                        <a href="#" class="btn btn-block btn-primary btn-raised btn-sm">Compare Rates</a>
+                        <a href="/compare/{{ x._id.kpi_id }}" class="btn btn-block btn-primary btn-raised btn-sm">Compare Rates</a>
                   </footer>
                 </div>
               </div>
@@ -216,5 +217,5 @@
 
 </section>
 
-
+</section>
       

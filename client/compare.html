@@ -1,0 +1,83 @@
+<section id="page" class="container-fluid">
+    <div class="row" ng-controller="MainCtrl">
+        <div class="col-sm-8">
+        <div class="inner-side shadow">
+            <h4>Compare {{ kpis.kpi_name }}</h4>
+        </div>
+        <div class="row">
+    
+            <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="metric in metrics">
+                <div class="dl deal-entry">
+                    <div class="brand"><h3>{{ metric.company }}</h3></div>
+                    <div class="discount midnight-blue">{{ metric.rate | custNumFormat : metric.unit }}</div>
+                    
+                    <div class="coupon">
+                         <div class="rating">
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                        </div>
+                    </div>
+                        <div style="padding-right: 10px;" class="pull-right">
+                              <span class="ti-thumb-up"></span>
+                              <span class="ti-thumb-down"></span>
+                        </div>
+                    
+                </div>
+            </div>
+
+
+        
+  </div><!--/row-->
+                
+    <!--Commentes -->
+                   <!-- /inner -->
+
+                </div>
+                <!-- /.col-sm-8 .content -->
+                <div class="col-sm-4 sidebar">
+                    <div class="inner-side shadow">
+                        <div class="widget widget-add">
+                            <hr data-symbol="BEST VALUE -{{ kpis.kpi_name }}">
+                                <div class="price col-xs-12 text-center" ng-repeat="bval in best_val">
+                                    <h2 class="rating-num">{{ bval.kpi_max | custNumFormat : bval._id.kpi_type }}</h2>
+									<div class="rating">
+									    <i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+									</div>
+									<div><i class="fa fa-trophy" aria-hidden="true"></i> Best Value</div>
+                                </div>
+                                <div class="dealAttributes" ng-repeat="bval in best_val">
+			                          <div class="valueInfo bg-light shadow">
+			                            <div class="value">
+			                              <p class="value"> {{ bval.kpi_min | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">Min</p>
+			                            </div>
+			                            <div class="discount">
+			                              <p class="value">{{ bval.kpi_avg | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">Average</p>
+			                            </div>
+			                            <div class="save">
+			                              <p class="value">{{ bval.kpi_max | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">HIGHEST</p>
+			                            </div>
+			                     </div>
+                        </div>
+                        <!-- /widget -->
+                        <div class="widget widget-add">
+                            <hr data-symbol="COMMENTS">
+                             <div class="fb-comments" data-href="https://bestvaluegh-dennisagyei.c9users.io" data-width="220" data-numposts="5">
+                             </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /col 4 - sidebar -->
+        </div>
+    </div>  <!-- Row End -->
+</section>

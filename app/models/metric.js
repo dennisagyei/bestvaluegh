@@ -7,6 +7,8 @@ var MetricSchema = new mongoose.Schema({
   featured : { type: Boolean },
   is_active : { type: Boolean },
   ref_url : { type: String },
+  logo : { type: String },
+  comments : { type: String },
   kpi_id : { type: mongoose.Schema.Types.ObjectId },
   company_id : { type: mongoose.Schema.Types.ObjectId },
   company : String

@@ -31,12 +31,21 @@
   <script type="text/javascript" src="js/restangular.min.js"></script>
   <script type="text/javascript" src="js/angular-route.min.js"></script>
   <script type="text/javascript" src="js/angular-resource.min.js"></script>
-  
+  <script type="text/javascript" src="js/angular-file-upload.min.js"></script>
 
 
 </head>
 
   <body>
+      <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=1600741810229725";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+        
     <div class="site-wrapper animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
 
       <header>
@@ -63,8 +72,9 @@
                               </a>
                       </div>
                       <div class="col-sm-3">
-                      	<img src="images/adverts_banner.jpg">
+                      	
                       </div>
+                      <img src="images/adverts_banner.jpg" class="img-responsive">
 
       			  </div>
                       </div>
@@ -101,33 +111,19 @@
                                 </a>
                               </li>
                                <li>
-								  <a href="/category/banking">
+								  <a href="/category/Banking">
 									 <i class="ti-settings">
 									</i>
 									Banking
 								  </a>
 								</li>
 								<li>
-								  <a href="/category/insurance">
-									  <i class="ti-settings">
-									</i>
-									Insurance
-								  </a>
-                              </li>
-                              <li>
 								  <a href="/category/energy">
 									  <i class="ti-settings">
 									</i>
 									Energy
 								  </a>
-                              </li>
-                               <li>
-								  <a href="/category/mobile">
-									  <i class="ti-settings">
-									</i>
-									Mobile Plans
-								  </a>
-                              </li>
+                </li>
                               <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                      <i class=" ti-settings">
@@ -155,7 +151,7 @@
       </header>
 
       
-      <div class="container">
+      <div class="container-fluid">
           <ng-view></ng-view>
       </div>
       
@@ -246,7 +242,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.animsition.min.js"></script>
   <script src="owl.carousel/owl.carousel.js"></script>
-  
+  <script src="js/masonry.pkgd.min.js"></script>
   <script src="js/plugins.js"></script>
 
 

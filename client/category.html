@@ -1,0 +1,132 @@
+<section id="page" class="container-fluid">
+    <div class="row" ng-controller="CatgCtrl">
+        <div class="col-sm-8">
+        <div class="inner-side shadow">
+            <h4>View Rates - Click on rate to compare...</h4>
+        </div>
+        <div class="row">
+        
+            <div class="col-sm-4" ng-repeat="x in cat_metric">
+                <div class="deal-entry blue">
+                  <div class="image">
+                    <a href="/compare/{{ x._id.kpi_id }}"  ><img src="images/{{ x._id.kpi_image}}" alt="#" class="img-responsive"></a>
+                  </div>
+                  <!-- /.image -->
+                  <div class="title">
+                    <a href="/compare/{{ x._id.kpi_id }}" title="ATLETIKA 3 mēnešu abonements">{{ x._id.kpi_name }}</a>
+                  </div>
+                  <div class="entry-content">
+                    <div class="prices clearfix">
+                      <div class="procent"> {{ x.kpi_min | custNumFormat : x._id.kpi_type }}</div>
+                      <div class="price"><b>{{ x.kpi_max | custNumFormat : x._id.kpi_type }}</b></div>
+                    </div>
+                    <div class="row">
+					<div class="col-sm-6"><p><span class="label label-primary">Lowest Rate</span></p></div>
+					<div class="col-sm-6"><p><span class="label label-primary">Highest Rate</span></p></div>
+					</div>
+                   	<div>
+					
+                   	</div>
+                  </div>
+                  <!--/.entry content -->
+                  <footer class="info_bar clearfix">
+                        <a href="/compare/{{ x._id.kpi_id }}" class="btn btn-block btn-primary btn-raised btn-sm">Compare Rates</a>
+                  </footer>
+                </div>
+              </div>
+
+
+        
+        </div><!--/row-->
+                
+
+                    <!-- /inner -->
+
+                </div>
+                <!-- /.col-sm-8 .content -->
+                <div class="col-sm-4 sidebar">
+                    <div class="inner-side shadow">
+                        <div class="widget widget-tabs">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <div role="tabpanel" id="tabs" class="tabbable responsive">
+                                  <!-- Nav tabs -->
+                                  <ul class="nav nav-tabs" role="tablist">
+                                    <li class="dropdown pull-right tabdrop hide">
+                                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="ti-menu">
+                                        </i>
+                                        
+                                        <b class="caret">
+                                        </b>
+                                      </a>
+                                      <ul class="dropdown-menu">
+                                      </ul>
+                                    </li>
+                                    
+                                    <li role="presentation" class="active">
+                                      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                                        Latest Comments
+                                      </a>
+                                    </li>
+                                    <li role="presentation">
+                                      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                                        Add Comment
+                                      </a>
+                                    </li>
+                                  </ul>
+                                  <!-- Tab panes -->
+                                  <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        <div class="fb-comments" data-href="https://bestvaluegh-dennisagyei.c9users.io" data-width="220" data-numposts="5">
+                                            
+                                        </div>
+                                      
+                                        
+                                    
+                                      <!--/wrap -->
+                                    </div>
+                                    <!-- /tab content -->
+                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                        <form action="#" method="post" id="comment-form" class="comments" novalidate="novalidate">
+                                                            <fieldset>
+                                                                <div class="row space-xs">
+                                                                    <div class="col-md-12">
+                                                                        <div>
+                                                                            <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="space-xs">
+                                                                    <div>
+                                                                        <textarea rows="8" name="message" id="message" placeholder="Write comment here ..." class="form-control">
+                                                                        </textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <p>
+                                                                    <button type="submit" class="btn btn-green btn-raised ripple-effect">
+                                                                        Submit Comment
+                                                                    </button>
+                                                                </p>
+                                                            </fieldset>
+                                                            
+                                                        </form>
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <!-- /widget -->
+                        <div class="widget widget-add">
+                            <hr data-symbol="ADVERTISE">
+                            <img src="http://placehold.it/480x480" alt="add" class="img-responsive">
+                        </div>
+
+
+                    </div>
+                    <!-- /col 4 - sidebar -->
+        </div>
+    </div>  <!-- Row End -->
+</section>

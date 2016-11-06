@@ -1,0 +1,183 @@
+<section id="page" class="container-fluid">
+	<div class="row" ng-controller="CompanyCtrl">
+    	<div class="col-sm-3 sidebar">
+    		<div class="bg-white shadow">
+    			<div class="widget-menu">
+    				<div class="cat-text">Admin Setup</div>
+    
+                    <!-- Sidebar navigation -->
+                    <ul class="nav sidebar-nav">
+                      <li>
+                        <a href="/admin"><i class="ti-shine"></i>Company Setup</a>
+                      </li>
+                      <li>
+                        <a href="/admin/kpi"><i class="ti-shine"></i>Kpi Setup</a>
+                      </li>
+                      <li>
+                        <a href="/admin/metric"><i class="ti-shine"></i>Metrics  Setup</a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="ti-shine"></i>User Accounts</a>
+                      </li>
+                    </ul>
+                    <!-- Sidebar divider -->
+                </div>
+                  <!-- /.widget -->
+    		</div>		
+            <!-- /col 4 - sidebar -->
+    	</div>
+
+        <div class="col-sm-9 sidebar">
+            <div class="bg-white shadow">
+    			<div class="widget-menu">
+    				<div class="cat-text">
+    				    Company Setup
+    				     <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" ng-click="AddItem()">Add New</button>
+    				</div>
+    				<div class="alert alert-default input-group">
+                <span class="input-group-btn">
+                <input type="text" class="form-control" placeholder="Search Company..." ng-model="search_query">
+                </span>
+            </div>
+            <div class="alert alert-info alert-dismissible" role="alert" ng-show="messages" ng-bind="messages">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+            </div>
+    				<div class="table-responsive alert alert-default">
+                         <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Company</th>
+                                <th>Website</th>
+                                <th>Logo</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="company in companies | filter:search_query">
+                                <td>{{ company.name }}</td>
+                                <td>{{ company.website }}</td>
+                                <td><img src="images/"{{ company.logo }} alt="Image" class="img-responsive img-thumbnail" width="250" height="80"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="EditItem(company)">Edit</span></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteItem(company._id)">Delete</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                         
+                          
+                        </div>
+    			    </div>
+    		</div>
+
+            <div class="inner-side">
+                
+            </div>
+            
+            <!-- add Modal -->
+              <div class="modal fade" id="addModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Add Company</h4>
+                    </div>
+                    <div class="modal-body alert alert-default">
+                            
+                            <form class="form-horizontal" role="form" name="CompanyForm" novalidate>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="company.name">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="website">Website:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="website" name="website" placeholder="Enter website" ng-model="company.website">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="logo">Logo:</label>
+                                <div class="col-sm-10">
+                                  <input type="file" class="form-control" id="logo" name="logo" accept="image/*" ng-model="company.logo">
+                                </div>
+                              </div>
+                              
+                              <div class="alert">
+                                  <input type="file" nv-file-select uploader="uploader"/><br/>
+                                  <ul>
+                                      <li ng-repeat="item in uploader.queue">
+                                          Name: <span ng-bind="item.file.name"></span><br/>
+                                          <button ng-click="item.upload()">upload</button>
+                                      </li>
+                                  </ul>
+                              </div>
+                            </form>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" ng-click="SaveItem(company)">Save</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- edit Modal -->
+              <div class="modal fade" id="editModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Edit Company</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                            <form class="form-horizontal" role="form" novalidate>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" placeholder="Enter name" ng-model="edit_company.name">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="website">Website:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="website" placeholder="Enter website" ng-model="edit_company.website">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="logo">Logo:</label>
+                                <div class="col-sm-10">
+                                  <input type="file" class="form-control" id="logo" placeholder="" ng-model="edit_company.logo">
+                                </div>
+                              </div>
+                            </form>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_company)">Save</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+    	</div><!-- /.col -9  -->
+    </div><!-- /.row -->
+    
+    <section id="page" class="container">
+        <div class="shadow bg-white mTop-30 frameLR">
+         </div>
+    </section>
+</section>
+      

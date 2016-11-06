@@ -10,7 +10,9 @@ module.exports = function(app) {
         // server routes ===========================================================
         // handle things like api calls
         // authentication routes
-        
+        var Mongoose = require('mongoose');
+        var ObjectId = Mongoose.Types.ObjectId; 
+
         app.get('/api', function (req, res) {
           res.send('BestValuegh API Version 1.0 is running');
         });
@@ -47,10 +49,9 @@ module.exports = function(app) {
         
         app.get('/api/kpi/get_kpi_stats', function(req, res) {
           Metric.aggregate([
-                          //{ $unwind: "$kpi_metric" } ,
-                          { $match : { is_active : true } },  //Having clause
-                          
-                          {
+                          ///{ $match : { featured : true } },  //Having clause
+                         //{ $limit : 4 },
+                         {
                               $lookup:
                                 {
                                   from: "kpis",
@@ -58,11 +59,11 @@ module.exports = function(app) {
                                   foreignField: "_id",
                                   as: "kpi_metric"
                                 }
-                         },
+                         },{ $unwind:"$kpi_metric" },
                          {
                            $group:
                              {
-                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id", kpi_image: "$kpi_metric.kpi_image" },
+                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id",kpi_type: "$kpi_metric.kpi_type",  kpi_image: "$kpi_metric.kpi_image" },
                                kpi_avg: { $avg: "$rate" },
                                kpi_min: { $min: "$rate" },
                                kpi_max: { $max: "$rate" },
@@ -80,6 +81,39 @@ module.exports = function(app) {
           });
         });
         
+        app.get('/api/kpi/get_kpi_stats/:id', function(req, res) {
+          Metric.aggregate([
+                        { $match : { kpi_id : new ObjectId(req.params.id) } },  //Having clause
+                         {
+                              $lookup:
+                                {
+                                  from: "kpis",
+                                  localField: "kpi_id",
+                                  foreignField: "_id",
+                                  as: "kpi_metric"
+                                }
+                         },{ $unwind:"$kpi_metric" },
+                         {
+                           $group:
+                             {
+                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id",kpi_type: "$kpi_metric.kpi_type",  kpi_image: "$kpi_metric.kpi_image" },
+                               kpi_avg: { $avg: "$rate" },
+                               kpi_min: { $min: "$rate" },
+                               kpi_max: { $max: "$rate" },
+                               kpi_count: { $sum: 1 }
+                             }
+                         }]).
+            exec(
+            function (err, data) {
+            if (err){
+              res.send(err);
+            }else{
+              res.json(data);
+            }
+            
+          });
+        });
+
         app.get('/api/kpi/get_featured_kpi', function(req, res) {
           Metric.aggregate([
                          //{ $match : { featured : true } },  //Having clause
@@ -92,11 +126,43 @@ module.exports = function(app) {
                                   foreignField: "_id",
                                   as: "kpi_metric"
                                 }
-                         },
+                         },{ $unwind:"$kpi_metric" },
                          {
                            $group:
                              {
-                               _id: { kpi_name: "$kpi_metric.kpi_name", kpi_id: "$kpi_id", kpi_image: "$kpi_metric.kpi_image" },
+                               _id: { kpi_name: "$kpi_metric.kpi_name", category: "$kpi_metric.category", kpi_id: "$kpi_id",kpi_type: "$kpi_metric.kpi_type", kpi_image: "$kpi_metric.kpi_image" },
+                               kpi_avg: { $avg: "$rate" },
+                               kpi_min: { $min: "$rate" },
+                               kpi_max: { $max: "$rate" },
+                               kpi_count: { $sum: 1 }
+                             }
+                         }]).
+            exec(
+            function (err, data) {
+            if (err){
+              res.send(err);
+            }else{
+              res.json(data);
+            }
+            
+          });
+        });
+        
+        app.get('/api/kpi/get_featured_by_category/:id', function(req, res) {
+            Metric.aggregate([
+                         {
+                              $lookup:
+                                {
+                                  from: "kpis",
+                                  localField: "kpi_id",
+                                  foreignField: "_id",
+                                  as: "kpi_metric"
+                                }
+                         },{ $unwind:"$kpi_metric" },{ $match : { "kpi_metric.category" : req.params.id  } },
+                         {
+                           $group:
+                             {
+                               _id: { kpi_name: "$kpi_metric.kpi_name", category: "$kpi_metric.category", kpi_id: "$kpi_id",kpi_type: "$kpi_metric.kpi_type", kpi_image: "$kpi_metric.kpi_image" },
                                kpi_avg: { $avg: "$rate" },
                                kpi_min: { $min: "$rate" },
                                kpi_max: { $max: "$rate" },
@@ -169,6 +235,14 @@ module.exports = function(app) {
         });
         
         /* GET /todos/id */
+        app.get('/api/metric/get_by_kpi/:id', function(req, res, next) {
+          Metric.find({kpi_id : req.params.id}).exec(function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+        });
+        
+        /* GET all metrics for a particular kpi */
         app.get('/api/metric/:id', function(req, res, next) {
           Metric.findById(req.params.id, function (err, data) {
             if (err) return next(err);
@@ -238,6 +312,7 @@ module.exports = function(app) {
             res.json(data);
           });
         });
+        
         // frontend routes =========================================================
         // route to handle all angular requests
         app.get('*', function(req, res) {

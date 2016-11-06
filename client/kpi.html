@@ -1,0 +1,246 @@
+<section id="page" class="container-fluid">
+	<div class="row" ng-controller="KpiCtrl">
+    	<div class="col-sm-3 sidebar">
+    		<div class="bg-white shadow">
+    			<div class="widget-menu">
+    				<div class="cat-text">Admin Setup</div>
+    
+                    <!-- Sidebar navigation -->
+                    <ul class="nav sidebar-nav">
+                      <li>
+                        <a href="/admin"><i class="ti-shine"></i>Company Setup</a>
+                      </li>
+                      <li>
+                        <a href="/admin/kpi"><i class="ti-shine"></i>Kpi Setup</a>
+                      </li>
+                      <li>
+                        <a href="/admin/metric"><i class="ti-shine"></i>Metrics Setup</a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="ti-shine"></i>User Accounts</a>
+                      </li>
+                    </ul>
+                    <!-- Sidebar divider -->
+                </div>
+                  <!-- /.widget -->
+    		</div>		
+            <!-- /col 4 - sidebar -->
+    	</div>
+
+        <div class="col-sm-9 sidebar">
+            <div class="bg-white shadow">
+    			<div class="widget-menu">
+    				<div class="cat-text">
+    				    <div class="input-group input-group-sm">
+                          <span class="input-group-btn">
+                             <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="AddItem()">+ Add New</button>
+                          </span>
+                          <input type="search" class="form-control" placeholder="Search Kpi..." ng-model="search_query">
+                        </div>
+    				</div>
+            <div class="alert alert-info alert-dismissible" role="alert" ng-show="messages" ng-bind="messages">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+            </div>
+    				<div class="table-responsive alert alert-default">
+                         <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Kpi Name</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Featured</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="kpi in kpis | filter:search_query">
+                                <td>{{ kpi.kpi_name }}</td>
+                                <td>{{ kpi.kpi_type }}</td>
+                                <td>{{ kpi.category }}</td>
+                                <td>{{ kpi.featured }}</td>
+                                <td>{{ kpi.is_active }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="EditItem(kpi)">Edit</span></button>
+                                    <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteItem(kpi._id)">Delete</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                         
+                          
+                        </div>
+    			    </div>
+    		</div>
+
+            <div class="inner-side">
+                
+            </div>
+            
+            <!-- add Modal -->
+              <div class="modal fade" id="addModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Add Kpi</h4>
+                    </div>
+                    <div class="modal-body alert alert-default">
+                            
+                            <form class="form-horizontal" role="form" name="KpiForm" novalidate>
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="name">Kpi Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="kpi.kpi_name">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="type">Type:</label>
+                                <div class="col-sm-10">
+                                   <select class="form-control" id="type" name="type" ng-model="kpi.kpi_type">
+                                        <option value="Ghs" selected>Ghs
+                                        <option value="%">%
+                                   </select>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="category">Category:</label>
+                                <div class="col-sm-10">
+                                  
+                                    <select class="form-control" id="category" name="category" ng-model="kpi.category">
+                                        <option value="Banking" selected>Banking
+                                        <option value="Fuel">Fuel
+                                    </select>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="description">Description:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="description" name="description" ng-model="kpi.description">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="ref_url">Ref. Url:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="kpi.ref_url">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="featured">Featured:</label>
+                                <div class="col-sm-10">
+                                     <select  class="form-control" id="featured" name="featured" ng-model="kpi.featured">
+                                        <option value="true" selected>Yes
+                                        <option value="false">No
+                                     </select>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <div class="col-sm-10">
+                                   <label class="radio-inline"><input type="radio" ng-model="kpi.is_active" name="is_active" value="true" checked>Active</label>
+                                   <label class="radio-inline"><input type="radio" ng-model="kpi.is_active" name="is_active" value="false">Inactive</label>
+                                </div>
+                                
+                              </div>
+                              
+                            </form>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" ng-click="SaveItem(company)">Save</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- edit Modal -->
+              <div class="modal fade" id="editModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Edit Kpi</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <form class="form-horizontal" role="form" novalidate>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="name">Kpi Name:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="edit_kpi.kpi_name">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="type">Type:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="type" name="type" placeholder="" ng-model="edit_kpi.kpi_type">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="category">Category:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="category" name="category" ng-model="edit_kpi.category">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="description">Description:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="description" name="description" ng-model="edit_kpi.description">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="ref_url">Ref. Url:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="edit_kpi.ref_url">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="featured">Featured:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="featured" name="featured" ng-model="edit_kpi.featured">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="is_active" name="is_active" ng-model="edit_kpi.is_active">
+                                </div>
+                              </div>
+                                
+                              
+                        </form>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_kpi)">Save</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+    	</div><!-- /.col -9  -->
+    </div><!-- /.row -->
+    
+    <section id="page" class="container">
+        <div class="shadow bg-white mTop-30 frameLR">
+         </div>
+    </section>
+</section>
+      
