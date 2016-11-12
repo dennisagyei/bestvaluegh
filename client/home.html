@@ -1,105 +1,59 @@
 <section id="page" class="container">
 	<div class="row" ng-controller="HomeCtrl">
-	<div class="col-sm-3 sidebar">
-		<div class="bg-white shadow">
-			<div class="widget-menu">
-				<div class="cat-text"><input class="form-control" placeholder="Search" type="text"></div>
+		
+		<!-- Carousel
+		================================================== -->
+		<div id="myCarousel" class="carousel slide">
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#myCarousel" data-slide-to="1"></li>
+		    <li data-target="#myCarousel" data-slide-to="2"></li>
+		  </ol>
+		  <div class="carousel-inner" role="listbox">
+		    <div class="item active">
+		      <img src="images/Home3.jpg" style="width:100%" class="img-responsive">
+		      <div class="container">
+		        <div class="carousel-caption">
+		          <h1>Bootstrap 3 Carousel Layout</h1>
+		          <p></p>
+		          <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Learn More</a>
+		        </p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="images/Home2.jpg" class="img-responsive">
+		      <div class="container">
+		        <div class="carousel-caption">
+		          <h1>Changes to the Grid</h1>
+		          <p>Bootstrap 3 still features a 12-column grid, but many of the CSS class names have completely changed.</p>
+		          <p><a class="btn btn-large btn-primary" href="#">Learn more</a></p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="images/Home4.jpg" class="img-responsive">
+		      <div class="container">
+		        <div class="carousel-caption">
+		          <h1>Percentage-based sizing</h1>
+		          <p>With "mobile-first" there is now only one percentage-based grid.</p>
+		          <p><a class="btn btn-large btn-primary" href="#">Browse gallery</a></p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  <!-- Controls -->
+		  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		    <span class="icon-prev"></span>
+		  </a>
+		  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+		    <span class="icon-next"></span>
+		  </a>  
+		</div>
+		<!-- /.carousel -->
 
-                <!-- Sidebar navigation -->
-                <ul class="nav sidebar-nav">
-                  <li ng-repeat="kpi in kpi_stats">
-                    <a href="/compare/{{ kpi._id.kpi_id }}"><i class="ti-shine"></i>{{ kpi._id.kpi_name }}<span class="sidebar-badge">{{kpi.kpi_count }}</span></a>
-                  </li>
-                </ul>
-                <!-- Sidebar divider -->
-            </div>
-              <!-- /.widget -->
-		</div>		
-        <!-- /col 4 - sidebar -->
-	</div>
-
-    <div class="col-sm-9">
-		<div class="slider">
-		    <div class="row">
-            	<div id="grid-slider" class="flexslider" flexslider>
-              		<ul class="">
-              			<li>
-			                  <div class="col-sm-7 col-lg-7 omega">
-			                      <img class="bg-image entry-lg" src="images/banking2.jpg">
-			                      <div class="deal-short-entry">
-			                        <p class="lead">How much does your bank charge you for Account Maintenance? Compare with other banks...</p>
-			                      </div>
-			                    </img>
-			                  </div>
-			                  <div class="col-sm-5 col-lg-5 alpha entry-lg">
-			                    <div class="buyPanel animated fadeInLeft bg-white Aligner shadow">
-			                      <div class="content">
-			                        <div class="deal-content">
-			                          <h3>{{ kpi._id }}</h3>
-			                          <p>This is a monthy levy charged to the customer</p>
-			                        </div>
-			
-			                            <div class="price col-xs-12 text-center">
-											<h2 class="rating-num">5.0</h2>
-											<div class="rating">
-												<i class="ti-star"></i>
-												<i class="ti-star"></i>
-												<i class="ti-star"></i>
-												<i class="ti-star"></i>
-												<i class="ti-star"></i>
-											</div>
-											<div><i class="fa fa-trophy" aria-hidden="true"></i> Best Value</div>
-										</div>
-			
-			                        <div class="dealAttributes">
-			                          <div class="valueInfo bg-light shadow">
-			                            <div class="value">
-			                              <p class="value">Ghs 5.0</p>
-			                              <p class="text">Min</p>
-			                            </div>
-			                            <div class="discount">
-			                              <p class="value">Ghs 6.4</p>
-			                              <p class="text">Average</p>
-			                            </div>
-			                            <div class="save">
-			                              <p class="value">Ghs 8.0</p>
-			                              <p class="text">HIGHEST</p>
-			                            </div>
-			                          </div>
-			                          <!-- /.value info -->
-			                          <div class="timeLeft text-center buy-now">
-			                            <a class="btn btn-primary btn-raised ripple-effect">Compare Rates</a>
-			                          </div>
-			
-			                          <div class="social-sharing text-center" data-permalink="http://labs.carsonshold.com/social-sharing-buttons">
-			                            <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
-			                            <a target="_blank" href="http://www.facebook.com/sharer.php" class="share-facebook">
-			                              <span class="icon icon-facebook"></span>
-			                              <span class="share-title">Share</span>
-			                              <span class="share-count is-loaded">288</span>
-			                            </a>
-			                            <!-- https://dev.twitter.com/docs/intents -->
-			                            <a target="_blank" href="http://twitter.com/share?url=http://themeforest.net/user/codenpixel" class="share-twitter">
-			                              <span class="icon icon-twitter"></span>
-			                              <span class="share-title">Tweet</span>
-			                              <span class="share-count is-loaded">78</span>
-			                            </a>
-			
-			                          </div>
-			                          <!--/.social sharing -->
-			                        </div>
-			                      </div>
-			                    </div>
-			                    <!-- /#buypanel -->
-			                  </div>
-			                </li>
-              		</ul>
-              	</div>	
-			</div>
-	    </div>
-	    <!-- /slider -->
-	</div><!-- /.col -9  -->
-</div><!-- /.row -->
+	</div><!-- /.row -->
       
 <section id="page" class="container">
         <div class="shadow bg-white mTop-30 frameLR"></div>

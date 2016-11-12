@@ -14,7 +14,7 @@
                         <a href="/admin/kpi"><i class="ti-shine"></i>Kpi Setup</a>
                       </li>
                       <li>
-                        <a href="/admin/metric"><i class="ti-shine"></i>Metrics  Setup</a>
+                        <a href="/admin/rates"><i class="ti-shine"></i>Rates Setup</a>
                       </li>
                       <li>
                         <a href="#"><i class="ti-shine"></i>User Accounts</a>
@@ -30,16 +30,17 @@
         <div class="col-sm-9 sidebar">
             <div class="bg-white shadow">
     			<div class="widget-menu">
-    				<div class="cat-text">
-    				    Company Setup
-    				     <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" ng-click="AddItem()">Add New</button>
+    				<div class="row cat-text">
+                <div class="col-sm-3">Company Setup</div>
+                <div class="col-sm-6">
+                  <input type="text" class="col-xs-12 input-sm" placeholder="Search Company..." ng-model="search_query">
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" ng-click="AddItem()">Add New</button>
+                </div>
+                          
     				</div>
-    				<div class="alert alert-default input-group">
-                <span class="input-group-btn">
-                <input type="text" class="form-control" placeholder="Search Company..." ng-model="search_query">
-                </span>
-            </div>
+    			
             <div class="alert alert-info alert-dismissible" role="alert" ng-show="messages" ng-bind="messages">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                                 </button>
@@ -108,15 +109,6 @@
                                 </div>
                               </div>
                               
-                              <div class="alert">
-                                  <input type="file" nv-file-select uploader="uploader"/><br/>
-                                  <ul>
-                                      <li ng-repeat="item in uploader.queue">
-                                          Name: <span ng-bind="item.file.name"></span><br/>
-                                          <button ng-click="item.upload()">upload</button>
-                                      </li>
-                                  </ul>
-                              </div>
                             </form>
                         
 

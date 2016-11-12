@@ -226,6 +226,30 @@ module.exports = function(app) {
           });
         });
         
+        app.get('/api/metric/join_kpi', function(req, res) {
+          Metric.aggregate([
+                         
+                         {
+                              $lookup:
+                                {
+                                  from: "kpis",
+                                  localField: "kpi_id",
+                                  foreignField: "_id",
+                                  as: "kpi_metric"
+                                }
+                         },{ $unwind:"$kpi_metric" }
+                         ]).
+            exec(
+            function (err, data) {
+            if (err){
+              res.send(err);
+            }else{
+              res.json(data);
+            }
+            
+          });
+        });
+        
         /* POST /todos */
         app.post('/api/metric', function(req, res, next) {
           Metric.create(req.body, function (err, data) {

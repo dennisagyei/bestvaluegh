@@ -1,6 +1,6 @@
 //console.clear();
 
-var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','angularFileUpload']);
+var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider']);
 
 app.config(function($routeProvider,$locationProvider){
 
@@ -11,7 +11,7 @@ app.config(function($routeProvider,$locationProvider){
     $routeProvider.when('/category/:id',{ templateUrl : "category.html" , controller: "CatgCtrl"});
     $routeProvider.when('/admin',{ templateUrl : "company.html" , controller: 'CompanyCtrl'});
     $routeProvider.when('/admin/kpi',{ templateUrl : "kpi.html" , controller: 'KpiCtrl'});
-    $routeProvider.when('/admin/metric',{ templateUrl : "metrics.html" , controller: 'MetricCtrl'});
+    $routeProvider.when('/admin/rates',{ templateUrl : "rates.html" , controller: 'RatesCtrl'});
     $routeProvider.otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);
@@ -48,6 +48,13 @@ app.factory("HomekpiFactory",function($http){
                return $http.get("/api/kpi/get_kpi_stats")
             }
         }
+});
+
+app.factory("RateskpiFactory",function($resource){
+  
+        return $resource('/api/metric/join_kpi', {}, {
+        'query' : { method: 'GET', isArray: true }
+        });
 });
 
 
@@ -156,10 +163,10 @@ app.controller("CatgCtrl",function($scope,$http,$routeParams){
 });
 
 
-app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location,FileUploader){
-    $scope.uploader = new FileUploader({ url: '/images',alias: 'logo'  });
+app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location){
+    //$scope.uploader = new FileUploader({ url: '/images',alias: 'logo'  });
     
-    console.log($scope.uploader);
+    
     
     $scope.companies=companyFactory.query();
     
@@ -190,7 +197,6 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
     };
     
     $scope.UpdateItem = function (Item) {
-        console.log(Item);
         companyFactory.update({id: Item._id }, Item);
     	$scope.companies=companyFactory.query();
     	$('#editModal').modal('hide')
@@ -214,24 +220,19 @@ app.controller("KpiCtrl",function($scope,$http,kpiFactory){
     
     $scope.messages = ''; 
     
-    $scope.Refresh = function () {
-    	$scope.company=[ { name: '',website:'' }];
-    };
-
     $scope.AddItem = function(){
         $('#addModal').modal();
     }; 
     
     $scope.EditItem = function(Item){
-        
         $scope.edit_kpi = Item;
         $('#editModal').modal();
     }; 
    
     $scope.SaveItem = function (Item) {
-        
+        //console.log(Item);
         kpiFactory.create(Item);
-        $scope.messages = 'New company has been created!'; 
+        $scope.messages = 'New Kpi has been created!'; 
         $scope.kpis=kpiFactory.query();
         $('#addModal').modal('hide')
         //$scope.Refresh();
@@ -255,16 +256,14 @@ app.controller("KpiCtrl",function($scope,$http,kpiFactory){
 
 });
 
-app.controller("MetricCtrl",function($scope,$http,metricFactory){
-
-    $scope.metrics=metricFactory.query();
+app.controller("RatesCtrl",function($scope,$http,metricFactory,kpiFactory,companyFactory,RateskpiFactory){
+ 
+    $scope.metrics = RateskpiFactory.query();
+    $scope.kpis=kpiFactory.query();
+    $scope.companies=companyFactory.query();
     
     $scope.messages = ''; 
     
-    $scope.Refresh = function () {
-    	$scope.company=[ { name: '',website:'' }];
-    };
-
     $scope.AddItem = function(){
         $('#addModal').modal();
     }; 
@@ -276,10 +275,10 @@ app.controller("MetricCtrl",function($scope,$http,metricFactory){
     }; 
    
     $scope.SaveItem = function (Item) {
-        
+        //console.log(Item);
         metricFactory.create(Item);
-        $scope.messages = 'New company has been created!'; 
-        $scope.metrics=metricFactory.query();
+        $scope.messages = 'New metric has been created!'; 
+        $scope.metrics=RateskpiFactory.query();
         $('#addModal').modal('hide')
         //$scope.Refresh();
 
@@ -293,7 +292,7 @@ app.controller("MetricCtrl",function($scope,$http,metricFactory){
     
     $scope.DeleteItem = function (Item) {
         metricFactory.destroy({id: Item });
-        $scope.metrics=metricFactory.query();
+        $scope.metrics=RateskpiFactory.query();
     };
     
     $scope.FindItem = function (Item) {
