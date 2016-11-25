@@ -56,10 +56,10 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr ng-repeat="company in companies | filter:search_query">
+                              <tr ng-repeat="company in companies | filter:search_query  | orderBy:'name' ">
                                 <td>{{ company.name }}</td>
                                 <td>{{ company.website }}</td>
-                                <td><img src="images/"{{ company.logo }} alt="Image" class="img-responsive img-thumbnail" width="250" height="80"></td>
+                                <td><img src="images/{{ company.logo }}" alt="Image" class="img-responsive img-thumbnail" width="250" height="80"></td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" ng-click="EditItem(company)">Edit</span></button>
                                     <button type="button" class="btn btn-danger btn-sm" ng-click="DeleteItem(company._id)">Delete</button>
@@ -85,36 +85,58 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4 class="modal-title">Add Company</h4>
                     </div>
-                    <div class="modal-body alert alert-default">
+                    <div class="modal-body">
                             
-                            <form class="form-horizontal" role="form" name="CompanyForm" novalidate>
+                            <form class="form-horizontal  alert alert-default" role="form" name="CompanyForm" novalidate>
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="email">Name:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="company.name">
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="new_company.name" required>
+                                  <span style="color:red" ng-show="CompanyForm.name.$dirty && CompanyForm.name.$invalid">
+                                    <span ng-show="CompanyForm.name.$error.required">Company is required.</span>
+                                  </span>
+                                  
                                 </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="website">Website:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="website" name="website" placeholder="Enter website" ng-model="company.website">
+                                  <input type="text" class="form-control" id="website" name="website" placeholder="Enter website" ng-model="new_company.website">
                                 </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="logo">Logo:</label>
                                 <div class="col-sm-10">
-                                  <input type="file" class="form-control" id="logo" name="logo" accept="image/*" ng-model="company.logo">
+                                  <input type="file" class="form-control" id="logo" name="logo" nv-file-select uploader="uploader" accept="image/*"><br/>
+                                  
+                                  <ul>
+                                    <li ng-repeat="item in uploader.queue">
+                                      <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                      <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar text-center" role="progressbar" ng-style="{ 'width': item.progress + '%' }">
+                                          <span class="text-center">{{item.progress}}% Complete</span>
+                                        </div>
+                                    </div>
+                                      <button class="btn btn-primary btn-sm" ng-click="item.upload()">upload</button>
+                                    </li>
+                                  </ul>
+                            
                                 </div>
                               </div>
                               
                             </form>
+                            
+                            
+                           
                         
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" ng-click="SaveItem(company)">Save</button>
+                
+                      <button type="button" class="btn btn-primary" ng-click="SaveItem(new_company)" ng-disabled="CompanyForm.name.$invalid">Save
+                      </button>
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -131,12 +153,15 @@
                     </div>
                     <div class="modal-body">
                         
-                            <form class="form-horizontal" role="form" novalidate>
+                            <form class="form-horizontal  alert alert-default" role="form" name="CompanyEditForm" novalidate>
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="email">Name:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" placeholder="Enter name" ng-model="edit_company.name">
-                                </div>
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="edit_company.name" required>
+                                  <span style="color:red" ng-show="CompanyEditForm.name.$dirty && CompanyEditForm.name.$invalid">
+                                    <span ng-show="CompanyEditForm.name.$error.required">Company is required.</span>
+                                  </span>
+                                  </div>
                               </div>
                               
                               <div class="form-group">
@@ -149,7 +174,19 @@
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="logo">Logo:</label>
                                 <div class="col-sm-10">
-                                  <input type="file" class="form-control" id="logo" placeholder="" ng-model="edit_company.logo">
+                                  <input type="file" class="form-control" id="logo" name="logo" nv-file-select uploader="uploader" accept="image/*"><br/>
+                                  
+                                  <ul>
+                                    <li ng-repeat="item in uploader.queue">
+                                      <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                      <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar text-center" role="progressbar" ng-style="{ 'width': item.progress + '%' }">
+                                          <span class="text-center">{{item.progress}}% Complete</span>
+                                        </div>
+                                    </div>
+                                      <button class="btn btn-primary btn-sm" ng-click="item.upload()">upload</button>
+                                    </li>
+                                  </ul>
                                 </div>
                               </div>
                             </form>
@@ -157,7 +194,8 @@
 
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_company)">Save</button>
+                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_company)" ng-disabled="CompanyEditForm.name.$invalid">Save
+                      </button>
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                   </div>

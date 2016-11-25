@@ -17,6 +17,11 @@ module.exports = function(app) {
           res.send('BestValuegh API Version 1.0 is running');
         });
         
+        
+        app.post('/images', function(req, res, next){
+          console.log('Uploade Successful ');  
+        });
+        
         /* GET /todos listing. */
         app.get('/api/kpi', function(req, res) {
           Kpi.find(function (err, data) {

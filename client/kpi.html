@@ -56,7 +56,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr ng-repeat="kpi in kpis | filter:search_query">
+                              <tr ng-repeat="kpi in kpis | filter:search_query | orderBy:'kpi_name' ">
                                 <td>{{ kpi.kpi_name }}</td>
                                 <td>{{ kpi.kpi_type }}</td>
                                 <td>{{ kpi.category }}</td>
@@ -89,31 +89,41 @@
                             
                             <form class="form-horizontal alert alert-default" role="form" name="KpiForm" novalidate>
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="name">Kpi Name:</label>
+                                <label class="control-label col-sm-2" for="name">Name:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" ng-model="new_kpi.kpi_name">
-                                </div>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="type">Type:</label>
-                                <div class="col-sm-10">
-                                   <select class="form-control" id="type" name="type" ng-model="new_kpi.kpi_type">
-                                        <option value="Ghs" selected>Ghs
-                                        <option value="%">%
-                                   </select>
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name of Kpi" ng-model="new_kpi.kpi_name" required>
+                                  <span style="color:red" ng-show="KpiForm.name.$dirty && KpiForm.name.$invalid">
+                                    <span ng-show="KpiForm.name.$error.required">Name is required.</span>
+                                  </span>
                                 </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="category">Category:</label>
-                                <div class="col-sm-10">
-                                  
-                                    <select class="form-control" id="category" name="category" ng-model="new_kpi.category">
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="category" name="category" ng-model="new_kpi.category" required>
                                         <option value="Banking" selected>Banking
                                         <option value="Fuel">Fuel
                                     </select>
+                                    <span style="color:red" ng-show="KpiForm.category.$dirty && KpiForm.category.$invalid">
+                                    <span ng-show="KpiForm.category.$error.required">Category is required.</span>
+                                    </span>
                                 </div>
+                                
+                                <label class="control-label col-sm-2" for="type">Type:</label>
+                                <div class="col-sm-4">
+                                   <select class="form-control" id="type" name="type" ng-model="new_kpi.kpi_type" required>
+                                        <option value="Ghs" selected>Ghs
+                                        <option value="%">%
+                                   </select>
+                                   <span style="color:red" ng-show="KpiForm.type.$dirty && KpiForm.type.$invalid">
+                                    <span ng-show="KpiForm.type.$error.required">Type is required.</span>
+                                    </span>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                
                               </div>
                               
                               <div class="form-group">
@@ -131,30 +141,38 @@
                               </div>
                               
                               <div class="form-group">
+                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <div class="col-sm-4">
+                                   <select  class="form-control" id="is_active" name="is_active" ng-model="new_kpi.is_active">
+                                      <option ng-value="Active" selected="selected">Active
+                                      <option ng-value="Inactive">Inactive
+                                   </select>
+                                </div>
+                                
                                 <label class="control-label col-sm-2" for="featured">Featured:</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                      <select  class="form-control" id="featured" name="featured" ng-model="new_kpi.featured">
-                                        <option ng-value="true" selected>Yes
-                                        <option ng-value="false">No
+                                        <option ng-value="Yes" selected="selected">Yes
+                                        <option ng-value="No">No
                                      </select>
                                 </div>
                               </div>
                               
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <label class="control-label col-sm-2" for="kpi_image">Display pix:</label>
                                 <div class="col-sm-10">
-                                   <label class="radio-inline"><input type="radio" ng-model="new_kpi.is_active" name="is_active" ng-value="true" checked>Active</label>
-                                   <label class="radio-inline"><input type="radio" ng-model="new_kpi.is_active" name="is_active" ng-value="false">Inactive</label>
+                                  <input type="text" class="form-control" id="kpi_image" name="kpi_image" ng-model="new_kpi.kpi_image">
                                 </div>
-                                
                               </div>
+                              
                               
                             </form>
                         
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" ng-click="SaveItem(new_kpi)">Save</button>
+                      <button type="button" class="btn btn-primary" ng-click="SaveItem(new_kpi)" ng-disabled="KpiForm.name.$invalid || KpiForm.category.$invalid || KpiForm.type.$invalid">Save
+                      </button>
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -172,34 +190,36 @@
                     <div class="modal-body">
                         
                         
-                            <form class="form-horizontal alert alert-default" role="form" name="KpiForm" novalidate>
+                            <form class="form-horizontal alert alert-default" role="form" name="editKpiForm" novalidate>
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="name">Kpi Name:</label>
+                                <label class="control-label col-sm-2" for="name">Name:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" name="name" placeholder="" ng-model="edit_kpi.kpi_name">
-                                </div>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="type">Type:</label>
-                                <div class="col-sm-10">
-                                   <select class="form-control" id="type" name="type" ng-model="edit_kpi.kpi_type">
-                                        <option value="Ghs" selected>Ghs
-                                        <option value="%">%
-                                   </select>
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="" ng-model="edit_kpi.kpi_name" required>
+                                  <span style="color:red" ng-show="editKpiForm.name.$dirty && editKpiForm.name.$invalid">
+                                    <span ng-show="editKpiForm.name.$error.required">Kpi is required.</span>
+                                  </span>
                                 </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="category">Category:</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                   
-                                    <select class="form-control" id="category" name="category" ng-model="edit_kpi.category">
-                                        <option value="Banking" selected>Banking
+                                    <select class="form-control" id="category" name="category" ng-model="edit_kpi.category" required>
+                                        <option value="Banking">Banking
                                         <option value="Fuel">Fuel
                                     </select>
                                 </div>
+                                
+                                <label class="control-label col-sm-2" for="type">Type:</label>
+                                <div class="col-sm-4">
+                                   <select class="form-control" id="type" name="type" ng-model="edit_kpi.kpi_type" required>
+                                        <option value="Ghs">Ghs
+                                        <option value="%">%
+                                   </select>
+                                </div>
                               </div>
+                              
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="description">Description:</label>
@@ -216,22 +236,28 @@
                               </div>
                               
                               <div class="form-group">
+                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <div class="col-sm-4">
+                                    <select  class="form-control" id="is_active" name="is_active" ng-model="edit_kpi.is_active">
+                                        <option ng-value="Active">Active
+                                        <option ng-value="Inactive">Inactive
+                                    </select>
+                                </div>
+                                
                                 <label class="control-label col-sm-2" for="featured">Featured:</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                      <select  class="form-control" id="featured" name="featured" ng-model="edit_kpi.featured">
-                                        <option value="true" selected>Yes
-                                        <option value="false">No
+                                        <option ng-value="Yes">Yes
+                                        <option ng-value="No">No
                                      </select>
                                 </div>
                               </div>
-                              
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="kpi_image">Display pix:</label>
                                 <div class="col-sm-10">
-                                   <label class="radio-inline"><input type="radio" ng-model="edit_kpi.is_active" name="is_active" value="true" checked>Active</label>
-                                   <label class="radio-inline"><input type="radio" ng-model="edit_kpi.is_active" name="is_active" value="false">Inactive</label>
+                                  <input type="text" class="form-control" id="kpi_image" name="kpi_image" ng-model="edit_kpi.kpi_image">
                                 </div>
-                                
                               </div>
                               
                             </form>
@@ -239,7 +265,8 @@
 
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_kpi)">Save</button>
+                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_kpi)" ng-disabled="editKpiForm.name.$invalid || editKpiForm.category.$invalid || editKpiForm.type.$invalid">Save
+                      </button>
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                   </div>

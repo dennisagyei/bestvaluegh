@@ -1,6 +1,6 @@
 //console.clear();
 
-var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider']);
+var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','angularFileUpload']);
 
 app.config(function($routeProvider,$locationProvider){
 
@@ -163,20 +163,26 @@ app.controller("CatgCtrl",function($scope,$http,$routeParams){
 });
 
 
-app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location){
-    //$scope.uploader = new FileUploader({ url: '/images',alias: 'logo'  });
+app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location,FileUploader){
+    $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });
     
-    
+    $scope.fileSelected = function() {
+     if ($scope.uploader.queue.length>1) {
+        $scope.uploader.queue[0].remove();
+     }
+    };
     
     $scope.companies=companyFactory.query();
     
     $scope.messages = ''; 
     
     $scope.Refresh = function () {
-    	$scope.company=[ { name: '',website:'' }];
+    	$scope.new_company.name= '';
+    	$scope.new_company.website= '';
     };
 
     $scope.AddItem = function(){
+        $scope.uploader.clearQueue();
         $('#addModal').modal();
     }; 
     
@@ -188,11 +194,16 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
    
     $scope.SaveItem = function (Item) {
         
-        companyFactory.create(Item);
+        Item.logo=$scope.uploader.queue[0].file.name;
+    
+        companyFactory.create(Item,function(){
+            $scope.Refresh();
+        });
         $scope.messages = 'New company has been created!'; 
         $scope.companies=companyFactory.query();
+        
         $('#addModal').modal('hide')
-        //$scope.Refresh();
+        
 
     };
     
@@ -211,7 +222,7 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
         companyFactory.find({id: Item });
     };
     
-
+    
 });
 
 app.controller("KpiCtrl",function($scope,$http,kpiFactory){
@@ -286,7 +297,7 @@ app.controller("RatesCtrl",function($scope,$http,metricFactory,kpiFactory,compan
     
     $scope.UpdateItem = function (Item) {
         metricFactory.update({id: Item._id }, Item);
-    	$scope.metrics=metricFactory.query();
+    	$scope.metrics=RateskpiFactory.query();
     	$('#editModal').modal('hide')
     };
     

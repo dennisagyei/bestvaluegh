@@ -4,8 +4,8 @@ var MetricSchema = new mongoose.Schema({
   rate: { type: Number },
   unit: { type: String }, //GHS OR %
   score: { type: Number },
-  featured : { type: Boolean },
-  is_active : { type: Boolean },
+  featured : { type: String },
+  is_active : { type: String },
   ref_url : { type: String },
   logo : { type: String },
   comments : { type: String },

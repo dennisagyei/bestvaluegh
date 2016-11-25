@@ -3,7 +3,7 @@
     	<div class="col-sm-3 sidebar">
     		<div class="bg-white shadow">
     			<div class="widget-menu">
-    				<div class="cat-text">Rates Setup</div>
+    				<div class="cat-text">Admin Setup</div>
     
                     <!-- Sidebar navigation -->
                     <ul class="nav sidebar-nav">
@@ -51,12 +51,12 @@
                                 <th>KPI Name</th>
                                 <th>Rate/Fee</th>
                                 <th>Unit</th>
-                                <th>Active</th>
+                                <th>Status</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr ng-repeat="metric in metrics | filter:search_query">
+                              <tr ng-repeat="metric in metrics | filter:search_query | orderBy:'company' ">
                                 <td>{{ metric.company }}</td>
                                 <td>{{ metric.kpi_metric.kpi_name }}</td>
                                 <td>{{ metric.rate }}</td>
@@ -138,16 +138,16 @@
                                 <label class="control-label col-sm-2" for="featured">Featured:</label>
                                 <div class="col-sm-4">
                                      <select  class="form-control" id="featured" name="featured" ng-model="new_metric.featured">
-                                        <option ng-value="true" selected>Yes
-                                        <option ng-value="false">No
+                                        <option value="Yes" selected>Yes
+                                        <option value="No">No
                                      </select>
                                 </div>
                                 
                                 <label class="control-label col-sm-2" for="is_active">Status:</label>
                                 <div class="col-sm-4">
                                   <select  class="form-control" id="is_active" name="is_active" ng-model="new_metric.is_active">
-                                        <option ng-value="true" selected>Active
-                                        <option ng-value="false">Inactive
+                                        <option value="Active" selected>Active
+                                        <option value="Inactive">Inactive
                                   </select>
                                 </div>
                               </div>
@@ -178,79 +178,88 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Edit Kpi</h4>
+                      <h4 class="modal-title">Edit Rate/Fee</h4>
                     </div>
                     <div class="modal-body">
                         
                         
                             <form class="form-horizontal alert alert-default" role="form" name="KpiForm" novalidate>
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="name">Kpi Name:</label>
+                                <label class="control-label col-sm-2" for="name">Kpi:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" name="name" placeholder="" ng-model="edit_kpi.kpi_name">
+                                    <select class="form-control" id="kpi_id" name="kpi_id" ng-model="edit_metric.kpi_id">
+                                        <option ng-repeat="kpi in kpis" value="{{ kpi._id}}">{{ kpi.kpi_name}}</option>
+                                    </select>
                                 </div>
                               </div>
                               
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="type">Type:</label>
-                                <div class="col-sm-10">
-                                   <select class="form-control" id="type" name="type" ng-model="edit_kpi.kpi_type">
+                                
+                                <label class="control-label col-sm-2" for="type">Rate:</label>
+                                <div class="col-sm-4">
+                                  <input type="number" class="form-control" id="rate" name="rate" ng-model="edit_metric.rate">
+                                </div>
+                                
+                                <label class="control-label col-sm-2" for="type">Unit:</label>
+                                <div class="col-sm-4">
+                                   <select class="form-control" id="unit" name="unit" ng-model="edit_metric.unit">
                                         <option value="Ghs" selected>Ghs
                                         <option value="%">%
                                    </select>
                                 </div>
                               </div>
                               
+                         
+                              
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="category">Category:</label>
+                                <label class="control-label col-sm-2" for="category">Company:</label>
                                 <div class="col-sm-10">
                                   
-                                    <select class="form-control" id="category" name="category" ng-model="edit_kpi.category">
-                                        <option value="Banking" selected>Banking
-                                        <option value="Fuel">Fuel
+                                    <select class="form-control" id="company" name="company" ng-model="edit_metric.company">
+                                        <option ng-repeat="company in companies" value="{{ company.name}}">{{ company.name}}</option>
                                     </select>
                                 </div>
                               </div>
                               
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="description">Description:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="description" name="description" ng-model="edit_kpi.description">
-                                </div>
-                              </div>
+                              
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="ref_url">Ref. Url:</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="edit_kpi.ref_url">
+                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="edit_metric.ref_url">
                                 </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="featured">Featured:</label>
-                                <div class="col-sm-10">
-                                     <select  class="form-control" id="featured" name="featured" ng-model="edit_kpi.featured">
-                                        <option value="true" selected>Yes
-                                        <option value="false">No
+                                <div class="col-sm-4">
+                                     <select  class="form-control" id="featured" name="featured" ng-model="edit_metric.featured">
+                                        <option value="Yes" >Yes
+                                        <option value="No">No
                                      </select>
+                                </div>
+                                
+                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <div class="col-sm-4">
+                                  <select  class="form-control" id="is_active" name="is_active" ng-model="edit_metric.is_active">
+                                        <option value="Active" selected>Active
+                                        <option value="Inactive">Inactive
+                                  </select>
                                 </div>
                               </div>
                               
                               <div class="form-group">
-                                <label class="control-label col-sm-2" for="is_active">Status:</label>
+                                <label class="control-label col-sm-2" for="comments">Comments:</label>
                                 <div class="col-sm-10">
-                                   <label class="radio-inline"><input type="radio" ng-model="edit_kpi.is_active" name="is_active" value="true" checked>Active</label>
-                                   <label class="radio-inline"><input type="radio" ng-model="edit_kpi.is_active" name="is_active" value="false">Inactive</label>
+                                  <textarea class="form-control" rows="3" id="comments" name="comments" ng-model="edit_metric.comments"></textarea>
                                 </div>
-                                
                               </div>
                               
                             </form>
                         
-
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_kpi)">Save</button>
+                      <button type="submit" class="btn btn-primary" ng-click="UpdateItem(edit_metric)">Save</button>
                       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
