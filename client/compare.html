@@ -2,7 +2,7 @@
     <div class="row" ng-controller="MainCtrl">
         <div class="col-sm-8">
         <div class="inner-side shadow">
-            <h4>Compare {{ kpis.kpi_name }}</h4> <a class="pull-right" href="/category/Banking"><< Back</a>
+            <h4>Compare {{ kpis.kpi_name }}</h4>
         </div>
         <div class="row">
     
@@ -42,7 +42,8 @@
                         <div class="widget widget-add">
                             <hr data-symbol="BEST VALUE -{{ kpis.kpi_name }}">
                                 <div class="price col-xs-12 text-center" ng-repeat="bval in best_val">
-                                    <h2 class="rating-num">{{ bval.kpi_max | custNumFormat : bval._id.kpi_type }}</h2>
+                                    <h2 class="rating-num">{{ bval._id.kpi_type=='Ghs' ? bval.kpi_min : bval.kpi_max | custNumFormat : bval._id.kpi_type}}</h2>
+                                    
 									<div class="rating">
 									    <i class="ti-star"></i>
 										<i class="ti-star"></i>

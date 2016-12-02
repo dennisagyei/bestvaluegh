@@ -1475,12 +1475,12 @@ label {
 }
 
 .tag:hover {
-    background-color: #aacc4e;
+    background-color: #0000b3;
     color: #fff
 }
 
 .tag:hover:after {
-    border-left-color: #aacc4e
+    border-left-color: #0000b3
 }
 
 #footer {

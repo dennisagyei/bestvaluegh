@@ -9,3 +9,9 @@ $ mongod --bind_ip=$IP --nojournal
 
 For repair work...
 $ mongod --repair
+
+
+Git update
+git add .
+git commit -m "comments"
+git push

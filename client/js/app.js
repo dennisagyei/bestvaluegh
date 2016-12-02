@@ -5,7 +5,9 @@ var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','an
 app.config(function($routeProvider,$locationProvider){
 
     $routeProvider.when('/',{ templateUrl : "home.html" , controller : 'HomeCtrl'});
-    $routeProvider.when('/contact',{ templateUrl : "contact.html"});
+    $routeProvider.when('/home2',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
+    $routeProvider.when('/home3',{ templateUrl : "home3.html" , controller : 'HomeCtrl'});
+    $routeProvider.when('/subscribe',{ templateUrl : "subscribe.html"});
     $routeProvider.when('/faq',{ templateUrl : "faq.html"});
     $routeProvider.when('/compare/:id',{ templateUrl : "compare.html" , controller : 'MainCtrl'});
     $routeProvider.when('/category/:id',{ templateUrl : "category.html" , controller: "CatgCtrl"});
@@ -162,6 +164,13 @@ app.controller("CatgCtrl",function($scope,$http,$routeParams){
      
 });
 
+
+app.controller("LoginCtrl",function($scope, $http, $routeParams) {
+    
+    $scope.ShowLogin=function(){
+        $('#LoginModal').modal({backdrop: 'static', keyboard: false})  ;
+    }
+})
 
 app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location,FileUploader){
     $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });

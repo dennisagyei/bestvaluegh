@@ -5,6 +5,11 @@
   "main": "server.js",
   "repository": "",
   "author": "Dennis Agyei <dennisagyei@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennisagyei/bestvaluegh.git"
+  },
   "dependencies": {
     "body-parser": "~1.4.2",
     "express": "~4.5.1",

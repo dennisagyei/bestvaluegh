@@ -1,46 +1,46 @@
 <section id="page" class="container">
 	<div class="row" ng-controller="HomeCtrl">
-		
-		<!-- Carousel
-		================================================== -->
-		<div id="myCarousel" class="carousel slide">
-		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
-		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		    <li data-target="#myCarousel" data-slide-to="1"></li>
-		  </ol>
-		  <div class="carousel-inner" role="listbox">
-		    <div class="item active">
-		      <img src="images/Home3.jpg" style="width:100%" class="img-responsive">
-		      <div class="container">
-		        <div class="carousel-caption">
-		          <h1 style="color:white">Are You Getting The Best Value On Banking Services?</h1>
-		          <p></p>
-		          <p><a class="btn btn-lg btn-primary" href="/category/Banking">Compare Rates</a>
-		        </p>
-		        </div>
-		      </div>
-		    </div>
-		    <div class="item">
-		      <img src="images/Home4.jpg" class="img-responsive">
-		      <div class="container">
-		        <div class="carousel-caption">
-		          <h1 style="color:white">How Much Does Your Bank Charges You for Services?</h1>
-		          <p>Compare Internet Banking Rates.</p>
-		          <p><a class="btn btn-large btn-primary" href="/category/Banking">Browse Fees</a></p>
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-		    <span class="icon-prev"></span>
-		  </a>
-		  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-		    <span class="icon-next"></span>
-		  </a>  
-		</div>
-		<!-- /.carousel -->
+		<div class="col-md-12">
+    		<!-- Carousel
+    		================================================== -->
+    		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    		  
+    		  <!-- Indicators 
+    		  <ol class="carousel-indicators">
+    		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    		 
+    		  </ol>-->
+    		  <div class="carousel-inner" role="listbox">
+    		    <div class="item active">
+    		      <img src="images/Home3.jpg" style="width:100%" class="img-responsive">
+    		      <div class="container">
+    		        <div class="carousel-caption">
+    		          
+                    <!-- Overlay -->
+                    <div style="width: 100%;height: 100%;background-color: #080d15;opacity: .7;z-index: -250;padding: 25px;">
+                    	<h1 style="color:white">Get Best Value on Services!</h1>
+    		          	<h3 style="color:white">Compare Bank Rates</h3>
+                         <ul class="tags">
+                            <li ng-repeat="x in kpi_featured">
+                            	<a href="/compare/{{ x._id.kpi_id }}" class="tag">{{ x._id.kpi_name }}</a></li>
+                           </ul>
+    		          <p><a class="btn btn-lg btn-primary btn-sm" href="/category/Banking">See more..</a></p>
+    		        </div>
+    		        </div>
+    		      </div>
+    		    </div>
+    		    
+    		  </div>
+    		  <!-- Controls 
+    		  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    		    <span class="icon-prev"></span>
+    		  </a>
+    		  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    		    <span class="icon-next"></span>
+    		  </a>  -->
+    		</div>
+    		<!-- /.carousel -->
+    	</div>
 
 	</div><!-- /.row -->
       
