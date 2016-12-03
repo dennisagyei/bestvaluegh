@@ -11,26 +11,26 @@
             <div class="row">
               <div class="col-sm-12 clearfix">
                 <div class="hr-link">
-                  <hr class="mBtm-50" data-symbol="COMPARE RATES FROM SERVICE PROVIDERS">
+                  <hr class="mBtm-50" data-symbol="COMPARE RATES FROM BANKS">
                 </div>
               </div>
             </div>
             
-            <div class="col-md-3"  ng-repeat="x in kpi_featured">
+            <div class="col-md-3" ng-repeat="x in kpi_featured | limitTo : 4">
                 <div class="deal-entry blue">
-                  <div class="image"><a href="#"  ><img src="images/banking_mobile.jpg" alt="#" class="img-responsive"></a></div>
+                  <div class="image"><a href="/compare/{{ x._id.kpi_id}}"  ><img src="images/{{ x._id.kpi_image}}" alt="#" class="img-responsive"></a></div>
                   <!-- /.image -->
-                  <div class="title"><a href="#" >{{ x._id.kpi_name }}</a></div>
-                  <div class="entry-content">
-                  		<ul class="tags">
-		              			<li><a href="#" class="tag">Ecobank</a><span class="label label-primary">24%</span></li>
-		              			<li><a href="#" class="tag">Fidelity Bank</a><span class="label label-primary">30%</span></li>
-		        				<li><a href="#" class="tag">Standard Chartered</a><span class="label label-primary">33%</span></li>
+                  <div class="title"><a href="/compare/{{ x._id.kpi_id}}" >{{ x._id.kpi_name }}</a></div>
+                  <div class="row">
+                  		<ul class="col-md-8">
+		              			<li style="margin-left:10px;"><a href="#" class="tag" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3">{{ metric.company }}</a></li>
+		        		</ul>
+		        		<ul class="col-md-4">
+		              			<li style="margin: 0 14px 14px 0;" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3"><span class="label label-primary">{{ metric.rate | custNumFormat : metric.unit }}</span></li>
 		        		</ul>
         		  </div>
 			    </div>
 			</div>
-
             
     
 </div><!--/.row -->

@@ -4,11 +4,12 @@ var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','an
 
 app.config(function($routeProvider,$locationProvider){
 
-    $routeProvider.when('/',{ templateUrl : "home.html" , controller : 'HomeCtrl'});
+    $routeProvider.when('/',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
     $routeProvider.when('/home2',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
     $routeProvider.when('/home3',{ templateUrl : "home3.html" , controller : 'HomeCtrl'});
     $routeProvider.when('/subscribe',{ templateUrl : "subscribe.html"});
     $routeProvider.when('/faq',{ templateUrl : "faq.html"});
+    $routeProvider.when('/contact',{ templateUrl : "contact.html"});
     $routeProvider.when('/compare/:id',{ templateUrl : "compare.html" , controller : 'MainCtrl'});
     $routeProvider.when('/category/:id',{ templateUrl : "category.html" , controller: "CatgCtrl"});
     $routeProvider.when('/admin',{ templateUrl : "company.html" , controller: 'CompanyCtrl'});
@@ -121,7 +122,10 @@ app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
         $scope.kpi_featured = response.data;
     });
     
-    
+    $http.get("/api/metric/join_kpi")
+    .then(function(response) {
+        $scope.kpi_metrics = response.data;
+    });
 });
 
 app.controller("MainCtrl",function($scope,$http,$routeParams){
@@ -250,8 +254,10 @@ app.controller("KpiCtrl",function($scope,$http,kpiFactory){
     }; 
    
     $scope.SaveItem = function (Item) {
-        //console.log(Item);
-        kpiFactory.create(Item);
+        
+        kpiFactory.create(Item,function(){
+            $scope.new_kpi=[];
+        });
         $scope.messages = 'New Kpi has been created!'; 
         $scope.kpis=kpiFactory.query();
         $('#addModal').modal('hide')
@@ -296,11 +302,13 @@ app.controller("RatesCtrl",function($scope,$http,metricFactory,kpiFactory,compan
    
     $scope.SaveItem = function (Item) {
         //console.log(Item);
-        metricFactory.create(Item);
-        $scope.messages = 'New metric has been created!'; 
+        metricFactory.create(Item,function(){
+             $scope.new_metric=[];
+        });
+        $scope.messages = 'New rate has been created!'; 
         $scope.metrics=RateskpiFactory.query();
         $('#addModal').modal('hide')
-        //$scope.Refresh();
+        
 
     };
     
