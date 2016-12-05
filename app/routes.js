@@ -17,12 +17,72 @@ module.exports = function(app) {
           res.send('BestValuegh API Version 1.0 is running');
         });
         
-        
-        app.post('/images', function(req, res, next){
-          console.log('Uploade Successful ');  
+        //Node Mailer API Calls 
+        var nodemailer = require('nodemailer');
+        var smtpTransport = nodemailer.createTransport({
+          host: "mailtrap.io",
+          port: 2525,
+          auth: {
+            user: "b8db91b8032261",
+            pass: "c20116e95c0b1f"
+          }
         });
         
-        /* GET /todos listing. */
+        app.post('/api/sendmail',function(req,res){
+          
+            var htmlContent = '<p>Name: ' + req.body.name + '</p>' +
+                    '<p>Email: ' + req.body.email + '</p>' +
+                    '<p>Message: ' + req.body.message + '</p>';
+                    
+            var mailOptions={
+                from: req.body.name + ' <' + req.body.email + '>',
+                to : 'dennisagyei@gmail.com',
+                sender: req.body.email,
+                subject : req.body.subject,
+                html: htmlContent
+            }
+           
+            smtpTransport.sendMail(mailOptions, function(error, info){
+            if(error){
+                return console.log(error);
+            }
+              //console.log('Message sent: ' + info.response);
+              return res.json(201, info.response);
+            });
+        });
+        
+        //MAil chimp subscription
+        //key 0d434b0ef6ac04a4caa2bca79eef8e3b-us10
+        //list id 27df953d19
+        var Mailchimp = require('mailchimp-api-v3')
+        var mailchimp = new Mailchimp('0d434b0ef6ac04a4caa2bca79eef8e3b-us10');
+        
+        app.post('/api/signup', function (req, res) {
+          // save user details to your database.
+          var subscriber = {
+              email_address: req.body.email, 
+              status: "subscribed", 
+              merge_fields: {
+                  "FNAME": req.body.firstname,
+                  "LNAME": req.body.lastname
+                   }
+          }
+      
+          
+          mailchimp.post({
+            path : '/lists/27df953d19/members',
+            body : subscriber
+          })
+          .then(function (result) {
+            return res.json(201, result);
+          })
+          .catch(function (err) {
+             console.log(err);
+          })
+          
+          
+        });
+        /* GET /KPI listing. */
         app.get('/api/kpi', function(req, res) {
           Kpi.find(function (err, data) {
             if (err){

@@ -7,6 +7,7 @@ var multer         = require('multer');
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var nodemailer     = require("nodemailer");
 
 // configuration ===========================================
 var storage =   multer.diskStorage({
@@ -34,7 +35,6 @@ app.post('/api/upload',  function (req, res, next) {
 })
 
 
-    
 // config files
 var db = require('./config/db');
 

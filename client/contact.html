@@ -1,40 +1,36 @@
    
-        <section id="page" class="container mBtm-50">
-            <div class="row">
+<section id="page" class="container mBtm-50">
+            <div class="row" ng-controller="HomeCtrl">
                 <div class="col-sm-8 mTop-30">
                     <div class="inner-wrap frameLR bg-white shadow clearfix ">
                         
                         <h2>Contact Us</h2>
+                        <p>Your email address will not be published. Required fields are marked *</p>
+                        <div class="alert alert-success alert-dismissible" ng-show="success_msg" ng-bind="success_msg">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                        
+                        <div class="alert alert-danger alert-dismissible" ng-show="error_msg" ng-bind="error_msg">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                        
                         <!-- widget -->
                         <div class="widget contact-widget">
                             
-                            <form class="contact-form clearfix" action="#" method="post" novalidate="novalidate">
-                                <p>
-                                    Your email address will not be published. Required fields are marked *
-                                </p>
-                                <br>
-                                <br>
+                            <form class="contact-form clearfix"  novalidate="novalidate">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <p class="input-block">
-                                            <label class="required">
-                                                Name
-                                                <span>
-                            (*)
-                          </span>
-                                            </label>
-                                            <input type="text" class="form-control" placeholder="Name">
+                                            <label class="required">Name<span>(*)</span></label>
+                                            <input type="text" class="form-control" placeholder="Name" ng-model="contactForm.name">
                                         </p>
                                     </div>
+                                    
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <p class="input-block">
-                                            <label class="required">
-                                                Email
-                                                <span>
-                            (*)
-                          </span>
+                                        <p  class="input-block">
+                                            <label class="required">Email<span>(*)</span>
                                             </label>
-                                            <input type="text" class="form-control" placeholder="Email">
+                                            <input type="text" class="form-control" placeholder="Email" ng-model="contactForm.email">
                                         </p>
                                     </div>
                                    
@@ -42,20 +38,12 @@
                                 <!-- row -->
 
                                 <p class="textarea-block">
-
-                                    <label class="required" for="contact_message">
-                                        Your message
-                                        <span>
-                        (*)
-                      </span>
-                                    </label>
-                                    <textarea rows="6" cols="88" id="contact_message" name="message" class="form-control">
-                                    
+                                    <label class="required" for="contact_message">Your message<span>(*)</span></label>
+                                    <textarea rows="6" cols="88" id="contact_message" name="message" class="form-control" ng-model="contactForm.message">
                                     </textarea>
                                 </p>
                                 <p class="contact-button clearfix">
-
-                                    <input type="submit" class="btn btn-raised ripple-effect btn-primary btn-lg" id="submit-contact" value="Send message">
+                                    <input type="submit" class="btn btn-raised ripple-effect btn-primary btn-lg" id="submit-contact" value="Send message" ng-click="postMail(contactForm)">
                                 </p>
                             </form>
                             <div id="response">

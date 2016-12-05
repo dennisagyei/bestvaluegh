@@ -100,6 +100,9 @@ app.factory('metricFactory',function($resource){
 
 app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
     
+    $scope.success_msg='';
+    $scope.error_msg='';
+    
     $scope.slides = [
 				'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
 				'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
@@ -126,6 +129,44 @@ app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
     .then(function(response) {
         $scope.kpi_metrics = response.data;
     });
+    
+    $scope.postMail = function (data) {
+        
+        data.subject='Contact Form Entry';
+        
+        $http.post('/api/sendmail', data)
+        .success(function(data) {
+          // Show success message
+          $scope.success_msg = 'Message sent successfully!';
+          $scope.error_msg = '';
+          $scope.contactForm={}; //reset fields
+        })
+        .error(function(data) {
+          // Show error message
+          $scope.error_msg = 'Error in sending message. Please try again';
+           $scope.success_msg = '';
+        });
+    };
+    
+    $scope.postSignup = function (data) {
+        
+        data.subject='Contact Form Entry';
+        
+        $http.post('/api/signup', data)
+        .success(function(data) {
+          // Show success message
+          $scope.success_msg = 'Subscription is successfull!';
+          $scope.error_msg = '';
+          $scope.Subscriber={}; //reset fields
+        })
+        .error(function(data) {
+          // Show error message
+          $scope.error_msg = 'Error with subscription. Please try again';
+          $scope.success_msg = '';
+        });
+    };
+    
+    
 });
 
 app.controller("MainCtrl",function($scope,$http,$routeParams){
@@ -207,8 +248,9 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
    
     $scope.SaveItem = function (Item) {
         
-        Item.logo=$scope.uploader.queue[0].file.name;
-    
+        if ($scope.uploader.queue.length>0){
+            Item.logo=$scope.uploader.queue[0].file.name;
+        }
         companyFactory.create(Item,function(){
             $scope.Refresh();
         });
@@ -238,13 +280,22 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
     
 });
 
-app.controller("KpiCtrl",function($scope,$http,kpiFactory){
+app.controller("KpiCtrl",function($scope,$http,kpiFactory,FileUploader){
+    
+    $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });
+    
+    $scope.fileSelected = function() {
+     if ($scope.uploader.queue.length>1) {
+        $scope.uploader.queue[0].remove();
+     }
+    };
     
     $scope.kpis=kpiFactory.query();
     
     $scope.messages = ''; 
     
     $scope.AddItem = function(){
+        $scope.uploader.clearQueue();
         $('#addModal').modal();
     }; 
     
@@ -254,6 +305,10 @@ app.controller("KpiCtrl",function($scope,$http,kpiFactory){
     }; 
    
     $scope.SaveItem = function (Item) {
+        
+        if ($scope.uploader.queue.length>0){
+            Item.kpi_image=$scope.uploader.queue[0].file.name;
+        }
         
         kpiFactory.create(Item,function(){
             $scope.new_kpi=[];
