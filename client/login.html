@@ -1,48 +1,41 @@
 <section id="page" class="container-fluid">
 	<div class="row" ng-controller="LoginCtrl">
-    	    
-            <!-- Login Modal -->
-              <div class="modal fade" id="LoginModal" role="dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Login </h4>
-                    </div>
-                    <div class="modal-body">
-                            
-                            <form class="form-horizontal  alert alert-default" role="form" name="LoginForm" novalidate>
+    <div class="col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3">
+      <div class="inner-side shadow">   
+        <h3 class='text-center'>Admin Login</h3>
+        <p></p>
+        <div class="alert alert-success alert-dismissible" ng-show="success_msg" ng-bind="success_msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <div class="alert alert-danger alert-dismissible" ng-show="error_msg" ng-bind="error_msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+                                          
+                        
+                        
+        <form class="form-horizontal  alert alert-default" role="form" name="LoginForm">
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="email">Username:</label>
-                                <div class="col-sm-10">
                                   <input type="text" class="form-control" id="name" name="name" ng-model="login.username" required>
                                   <span style="color:red" ng-show="LoginForm.name.$dirty && LoginForm.name.$invalid">
                                     <span ng-show="LoginForm.name.$error.required">Username is required.</span>
                                   </span>
                                   
-                                </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="website">Password:</label>
-                                <div class="col-sm-10">
-                                  <input type="password" class="form-control" id="password" name="password" png-model="login.password">
-                                </div>
+                                  <input type="password" class="form-control" id="password" name="password" required>
                               </div>
                               
-                              
-                            </form>
-                    </div>
-                    <div class="modal-footer">
-                
-                      <button type="button" class="btn btn-primary" ng-click="" ng-disabled="LoginForm.name.$invalid">Save
-                      </button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-    </div><!-- /.row -->
+                              <div class="form-group pull-right">
+                                <button type="reset" class="btn btn-danger" >Cancel</button>
+                              <button type="submit" class="btn btn-primary" >Login</button>
+                              </div>
+        </form>
+      </div>
+    </div>
+  </div><!-- /.row -->
     
     <section id="page" class="container">
         <div class="shadow bg-white mTop-30 frameLR">

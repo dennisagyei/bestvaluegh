@@ -1,9 +1,11 @@
 // app/routes.js
 
-// grab the demo model we just created
+// grab the models we just created
 var Company = require('./models/company.js');
 var Kpi = require('./models/kpi.js');
 var Metric = require('./models/metric.js');
+var Subscriber = require('./models/subscriber.js');
+var User = require('./models/user.js');
 
 module.exports = function(app) {
 
@@ -12,7 +14,9 @@ module.exports = function(app) {
         // authentication routes
         var Mongoose = require('mongoose');
         var ObjectId = Mongoose.Types.ObjectId; 
-
+        var jwt         = require('jwt-simple');
+        var secret ='devdacticIsAwesome';
+        
         app.get('/api', function (req, res) {
           res.send('BestValuegh API Version 1.0 is running');
         });
@@ -50,7 +54,50 @@ module.exports = function(app) {
               return res.json(201, info.response);
             });
         });
-        
+        //-=======================User Register API------------===============================
+        app.post('/api/register', function(req, res) {
+            if (!req.body.name || !req.body.password) {
+              res.json({success: false, msg: 'Please enter name and password.'});
+            } else {
+              var newUser = new User({
+                name: req.body.name,
+                password: req.body.password
+              });
+              // save the user
+              newUser.save(function(err) {
+                if (err) {
+                  return res.json({success: false, msg: 'Username already exists.'});
+                }
+                res.json({success: true, msg: 'Successful created new user.'});
+              });
+            }
+          });
+          //=====================================================================================
+          // route to authenticate a user (POST http://localhost:8080/api/authenticate)
+          app.post('/api/authenticate', function(req, res) {
+            User.findOne({
+              name: req.body.name
+            }, function(err, user) {
+              if (err) throw err;
+           
+              if (!user) {
+                res.send({success: false, msg: 'Authentication failed. User not found.'});
+              } else {
+                // check if password matches
+                user.comparePassword(req.body.password, function (err, isMatch) {
+                  if (isMatch && !err) {
+                    // if user is found and password is right create a token
+                    var token = jwt.encode(user, secret);
+                    // return the information including token as JSON
+                    res.json({success: true, token: 'JWT ' + token});
+                  } else {
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+                  }
+                });
+              }
+            });
+          });
+          //=========================================================================================================
         //MAil chimp subscription
         //key 0d434b0ef6ac04a4caa2bca79eef8e3b-us10
         //list id 27df953d19
@@ -64,7 +111,8 @@ module.exports = function(app) {
               status: "subscribed", 
               merge_fields: {
                   "FNAME": req.body.firstname,
-                  "LNAME": req.body.lastname
+                  "LNAME": req.body.lastname,
+                  "PHONE": req.body.phone
                    }
           }
       
@@ -72,16 +120,17 @@ module.exports = function(app) {
           mailchimp.post({
             path : '/lists/27df953d19/members',
             body : subscriber
-          })
-          .then(function (result) {
-            return res.json(201, result);
-          })
-          .catch(function (err) {
-             console.log(err);
-          })
-          
+          },function (err, result) {
+            if (err){
+              res.send(err);
+            }else{
+              res.json(result);
+            }
+          });
           
         });
+        
+        
         /* GET /KPI listing. */
         app.get('/api/kpi', function(req, res) {
           Kpi.find(function (err, data) {
@@ -401,7 +450,17 @@ module.exports = function(app) {
             res.json(data);
           });
         });
-        
+        //=========================Subscriber endpoints=============================
+        app.post('/api/subscriber', function(req, res,next) {
+          //var newSubscriber = req.body;
+
+          Subscriber.create(req.body, function (err, data) {
+            if (err) return next(err);
+            res.json(data);
+          });
+          
+        });
+
         // frontend routes =========================================================
         // route to handle all angular requests
         app.get('*', function(req, res) {

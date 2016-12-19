@@ -17,12 +17,12 @@
                         <!-- widget -->
                         <div class="widget contact-widget">
                             
-                            <form class="contact-form clearfix"  novalidate="novalidate">
+                            <form class="contact-form clearfix" ng-submit="postMail(contactForm)">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <p class="input-block">
                                             <label class="required">Name<span>(*)</span></label>
-                                            <input type="text" class="form-control" placeholder="Name" ng-model="contactForm.name">
+                                            <input type="text" class="form-control" placeholder="Name" ng-model="contactForm.name" required>
                                         </p>
                                     </div>
                                     
@@ -30,7 +30,7 @@
                                         <p  class="input-block">
                                             <label class="required">Email<span>(*)</span>
                                             </label>
-                                            <input type="text" class="form-control" placeholder="Email" ng-model="contactForm.email">
+                                            <input type="email" class="form-control" placeholder="Email" ng-model="contactForm.email" required>
                                         </p>
                                     </div>
                                    
@@ -39,11 +39,11 @@
 
                                 <p class="textarea-block">
                                     <label class="required" for="contact_message">Your message<span>(*)</span></label>
-                                    <textarea rows="6" cols="88" id="contact_message" name="message" class="form-control" ng-model="contactForm.message">
+                                    <textarea rows="6" cols="88" id="contact_message" name="message" class="form-control" ng-model="contactForm.message" required>
                                     </textarea>
                                 </p>
                                 <p class="contact-button clearfix">
-                                    <input type="submit" class="btn btn-raised ripple-effect btn-primary btn-lg" id="submit-contact" value="Send message" ng-click="postMail(contactForm)">
+                                    <input type="submit" class="btn btn-raised ripple-effect btn-primary btn-lg" id="submit-contact" value="Send message">
                                 </p>
                             </form>
                             <div id="response">

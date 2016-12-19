@@ -25,11 +25,11 @@ app.post('/api/upload',  function (req, res, next) {
 
   upload(req,res,function(err) {
         if(err) {
-          console.log(err);
+            //console.log(err);
             return res.end("Error uploading file.");
         }
         res.end("File is uploaded");
-        console.log(req.files)
+        //console.log(req.files)
     });
   
 })

@@ -12,7 +12,8 @@ app.config(function($routeProvider,$locationProvider){
     $routeProvider.when('/contact',{ templateUrl : "contact.html"});
     $routeProvider.when('/compare/:id',{ templateUrl : "compare.html" , controller : 'MainCtrl'});
     $routeProvider.when('/category/:id',{ templateUrl : "category.html" , controller: "CatgCtrl"});
-    $routeProvider.when('/admin',{ templateUrl : "company.html" , controller: 'CompanyCtrl'});
+    $routeProvider.when('/admin',{ templateUrl : "login.html" , controller: 'LoginCtrl'});
+    $routeProvider.when('/admin/company',{ templateUrl : "company.html" , controller: 'CompanyCtrl'});
     $routeProvider.when('/admin/kpi',{ templateUrl : "kpi.html" , controller: 'KpiCtrl'});
     $routeProvider.when('/admin/rates',{ templateUrl : "rates.html" , controller: 'RatesCtrl'});
     $routeProvider.otherwise({redirectTo: '/'});
@@ -98,18 +99,10 @@ app.factory('metricFactory',function($resource){
    
 });
 
-app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
+app.controller('HomeCtrl', function($scope,$http,$timeout,HomekpiFactory) {
     
     $scope.success_msg='';
     $scope.error_msg='';
-    
-    $scope.slides = [
-				'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-				'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-				'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-				'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-			];
-			
     
     HomekpiFactory.getData()
     .success(function(data){
@@ -140,6 +133,10 @@ app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
           $scope.success_msg = 'Message sent successfully!';
           $scope.error_msg = '';
           $scope.contactForm={}; //reset fields
+          $timeout(function () {
+            $scope.success_msg = '';
+          }, 4000);
+          
         })
         .error(function(data) {
           // Show error message
@@ -154,12 +151,40 @@ app.controller('HomeCtrl', function($scope,$http,HomekpiFactory) {
         
         $http.post('/api/signup', data)
         .success(function(data) {
-          // Show success message
-          $scope.success_msg = 'Subscription is successfull!';
-          $scope.error_msg = '';
-          $scope.Subscriber={}; //reset fields
+            //console.log(data);
+            
+            if (data.status=='400')
+            {
+                  if (data.title=='Member Exists')
+                  {
+                       $scope.error_msg = 'You have already subscribed to this service.';
+                  } else {
+                      $scope.error_msg = 'Error with subscription. Please try again';
+                  }
+                  $scope.success_msg = '';
+                
+            }else
+            {
+                //save into db
+                $http.post('/api/subscriber', data)
+               .then(
+                   function(response){
+                     // success callback
+                   }, 
+                   function(response){
+                     // failure callback
+                   }
+                );
+                
+                        // Show success message
+                  $scope.success_msg = 'Subscription is successfull!';
+                  $scope.error_msg = '';
+                  $scope.Subscriber={}; //reset fields
+                
+            }
+            
         })
-        .error(function(data) {
+        .error(function(error) {
           // Show error message
           $scope.error_msg = 'Error with subscription. Please try again';
           $scope.success_msg = '';
@@ -201,7 +226,6 @@ app.controller("CatgCtrl",function($scope,$http,$routeParams){
     $http.get('/api/kpi/get_featured_by_category/' + id)
     .then(function(response) {
         $scope.cat_metric = response.data;
-        console.log(response.data);
     }, function(response) {
         //Second function handles error
         console.log(response.statustext);
