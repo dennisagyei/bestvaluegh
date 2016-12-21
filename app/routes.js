@@ -99,10 +99,9 @@ module.exports = function(app) {
           });
           //=========================================================================================================
         //MAil chimp subscription
-        //key 0d434b0ef6ac04a4caa2bca79eef8e3b-us10
         //list id 27df953d19
         var Mailchimp = require('mailchimp-api-v3')
-        var mailchimp = new Mailchimp('0d434b0ef6ac04a4caa2bca79eef8e3b-us10');
+        var mailchimp = new Mailchimp('4dabbf3013c7427a51d3b3d0844baee8-us10s');
         
         app.post('/api/signup', function (req, res) {
           // save user details to your database.
@@ -464,7 +463,7 @@ module.exports = function(app) {
         // frontend routes =========================================================
         // route to handle all angular requests
         app.get('*', function(req, res) {
-            res.sendfile('./client/index.html'); // load our public/index.html file
+            res.sendfile('./client/home4.html'); // load our public/index.html file
         });
 
     };

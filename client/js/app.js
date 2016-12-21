@@ -5,7 +5,7 @@ var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','an
 app.config(function($routeProvider,$locationProvider){
 
     $routeProvider.when('/',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
-    $routeProvider.when('/home2',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
+    $routeProvider.when('/new',{ templateUrl : "home4.html"});
     $routeProvider.when('/home3',{ templateUrl : "home3.html" , controller : 'HomeCtrl'});
     $routeProvider.when('/subscribe',{ templateUrl : "subscribe.html"});
     $routeProvider.when('/faq',{ templateUrl : "faq.html"});
