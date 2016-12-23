@@ -37,8 +37,8 @@ app.post('/api/upload',  function (req, res, next) {
 // config files
 var db = require('./config/db');
 
-// set our port
-var port = process.env.PORT || 3000; 
+// set our port 3000 for dev Env
+var port = process.env.PORT || 8080; 
 
 // connect to our mongoDB database 
 // (uncomment after you enter in your own credentials in config/db.js)
