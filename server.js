@@ -1,5 +1,4 @@
-// server.js
-
+#!/usr/bin/env nodejs
 // modules =================================================
 var express        = require('express');
 var app            = express();

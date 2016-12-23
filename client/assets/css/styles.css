@@ -243,6 +243,47 @@ body {
 	background-color: rgb(78, 108, 239);
 }
 
+/* Subscribe Page */
+.container-subscribe {
+	margin-top: 140px;
+	margin-bottom: 50px;
+}
+
+.subscribe {
+	background-color: #fff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+}
+
+.glyph-green {
+	color: #3ccd03;
+}
+
+.subscribe-notification h4 {
+	font-weight: 500;
+	color: #000;
+	margin-right: 20px;
+}
+
+.advert-subscribe {
+	padding: 15px 25px;
+	background-color: rgb(247, 252, 255);
+	color: #000;
+}
+
+.btn-sub {
+	background-color: rgb(78, 108, 239);
+	color: #eee;
+}
+
+.subscribe-form label {
+	font-weight: lighter;
+	color: #000;
+}
+
 /* Footer */
 
 .footer-margin {
