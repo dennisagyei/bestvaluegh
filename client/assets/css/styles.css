@@ -1,4 +1,16 @@
 
+/*
+
+////////////////////////////////////////////////
+
+  * Project Name: Bestvaluegh
+  * Author: Zak (www.sleekjob.com)
+  * Date: 20-12-16
+
+///////////////////////////////////////////////
+
+ */
+
 body {
     color: #7D8693;
     letter-spacing: .01rem;
@@ -60,7 +72,7 @@ body {
 .hero-bg {
 	height: 450px;
 	background-repeat: no-repeat;
-	background-size: 100%;
+	background-size: cover;
 	padding-top: 100px;
     margin-top: 70px;
 }
@@ -113,7 +125,9 @@ body {
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+    height: 355px;
 }
+
 
 .padding {
 	padding-top: 20px;
@@ -124,6 +138,10 @@ body {
 
 .plans > p > span {
 	align-content: right;
+}
+
+.float {
+	float: right;
 }
 
 /* Advertise */
@@ -243,6 +261,40 @@ body {
 	background-color: rgb(78, 108, 239);
 }
 
+
+@media (max-width: 767px) {
+	.banner-logo {
+	    margin-left: 189px;
+	    width: 130px;
+	    height: 30px;
+	    float: right;
+	    margin-top: auto;
+	    margin-bottom: auto;
+	}
+	.hero-bg {
+		padding-top: 30px;
+		height: 150px;
+	}
+	.hero-btn .btn-mobile {
+	    color: #333;
+		background-color: #e6e6e6;
+		border-color: #adadad;
+		padding: 2px 5px;
+		margin-left: 207px;
+		font-size: 9px;
+		margin-top: 9px;
+		float: right;
+		margin-top: auto;
+	    margin-bottom: auto;
+	}
+	.price-table .price-box {
+		margin-bottom: 25px;
+		top: 8px;
+		width: 88%;
+		height: auto;
+	}
+}
+
 /* Subscribe Page */
 .container-subscribe {
 	margin-top: 140px;
@@ -283,6 +335,87 @@ body {
 	font-weight: lighter;
 	color: #000;
 }
+
+/* Contact Page */
+.container-contact {
+	margin-top: 110px;
+	margin-bottom: 50px
+}
+
+.contact {
+	background-color: #fff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    position: relative;
+}
+
+.contact h4 {
+	color: #000;
+	padding-left: 50px;
+}
+
+.contact-form, .contact-details {
+	padding-top: 20px;
+	padding-bottom: 5px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.contact-details {
+	color: rgba(55, 52, 53, 0.61);
+	float: right;
+}
+
+.color {
+	color: #373435;
+}
+
+/* FAQ Page */
+.container-faq {
+	margin-top: 120px;
+}
+
+.faq {
+	background-color: #fff;
+	padding-top: 20px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    margin-bottom: 40px;
+}
+
+.faq h5 {
+	color: #000;
+	padding-top: 10px;
+}
+
+.faq-header {
+	background-color: #fff;
+	color: #000;
+	padding-left: 20px;
+	padding-top: 8px;
+	padding-bottom: 5px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+}
+
+.glyph-ask {
+	font-size: 25px;
+	color: #337ab7;
+}
+
+#ask {
+	font-style: italic;
+	color: #337ab7;
+}
+
 
 /* Footer */
 
