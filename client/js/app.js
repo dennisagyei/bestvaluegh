@@ -1,6 +1,6 @@
 //console.clear();
 
-var app = angular.module('app', ['ngRoute','ngResource','angular-flexslider','angularFileUpload']);
+var app = angular.module('app', ['ngRoute','ngCookies','ngResource','angular-flexslider','angularFileUpload']);
 
 app.config(function($routeProvider,$locationProvider){
 
@@ -234,15 +234,49 @@ app.controller("CatgCtrl",function($scope,$http,$routeParams){
 });
 
 
-app.controller("LoginCtrl",function($scope, $http, $routeParams) {
+app.controller("LoginCtrl",function($scope, $timeout, $http, $location, $routeParams, $cookies) {
     
     $scope.ShowLogin=function(){
         $('#LoginModal').modal({backdrop: 'static', keyboard: false})  ;
     }
+    
+    $scope.CheckLogin = function (data) {
+        
+        $http.post('/api/authenticate', data)
+        .success(function(response) {
+            //console.log(response);
+            if (response.success==true)
+            {
+                $cookies.put('IsLogin', 'true');
+                $location.path('/admin/company');
+            } else 
+            {
+                 $scope.error_msg = 'Invalid username or password';
+                 $timeout(function () {
+                    $scope.error_msg = '';
+                }, 4000);
+            }
+        })
+        .error(function(error) {
+          // Show server error message
+          $scope.error_msg = 'Invalid username or password';
+          
+        });
+    }
 })
 
-app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$location,FileUploader){
+app.controller("CompanyCtrl",function($scope,$cookies,$http,$routeParams,companyFactory,$location,FileUploader){
     $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });
+    
+    var IsLogin = $cookies.get('IsLogin');
+    if (IsLogin!='true') {
+            $location.path('/admin');
+    }
+    
+    $scope.Logout = function() {
+        $cookies.put('IsLogin', 'false');
+        $location.path('/admin');
+    }
     
     $scope.fileSelected = function() {
      if ($scope.uploader.queue.length>1) {
@@ -304,9 +338,19 @@ app.controller("CompanyCtrl",function($scope,$http,$routeParams,companyFactory,$
     
 });
 
-app.controller("KpiCtrl",function($scope,$http,kpiFactory,FileUploader){
+app.controller("KpiCtrl",function($scope,$location,$cookies,$http,kpiFactory,FileUploader){
     
     $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });
+    
+    var IsLogin = $cookies.get('IsLogin');
+    if (IsLogin!='true') {
+            $location.path('/admin');
+    }
+    
+    $scope.Logout = function() {
+        $cookies.put('IsLogin', 'false');
+        $location.path('/admin');
+    }
     
     $scope.fileSelected = function() {
      if ($scope.uploader.queue.length>1) {
@@ -361,8 +405,18 @@ app.controller("KpiCtrl",function($scope,$http,kpiFactory,FileUploader){
 
 });
 
-app.controller("RatesCtrl",function($scope,$http,metricFactory,kpiFactory,companyFactory,RateskpiFactory){
- 
+app.controller("RatesCtrl",function($scope,$cookies,$location,$http,metricFactory,kpiFactory,companyFactory,RateskpiFactory){
+    
+    var IsLogin = $cookies.get('IsLogin');
+    if (IsLogin!='true') {
+            $location.path('/admin');
+    }
+    
+    $scope.Logout = function() {
+        $cookies.put('IsLogin', 'false');
+        $location.path('/admin');
+    }
+    
     $scope.metrics = RateskpiFactory.query();
     $scope.kpis=kpiFactory.query();
     $scope.companies=companyFactory.query();

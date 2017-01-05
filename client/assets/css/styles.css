@@ -5,7 +5,7 @@
 
   * Project Name: Bestvaluegh
   * Author: Zak (www.sleekjob.com)
-  * Date: 20-12-16
+  * Date: 29-12-16
 
 ///////////////////////////////////////////////
 
@@ -70,11 +70,27 @@ body {
 
 /* Hero Section */
 .hero-bg {
-	height: 450px;
+	height: 580px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding-top: 100px;
     margin-top: 70px;
+}
+
+.ads{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.advert-section {
+    margin-top: 75px;
+    background-color: #eee;
+    padding: 10px 20px;
+}
+
+.ad-img {
+	padding-top: 5px;
+	height: 50%;
 }
 
 .banner-logo {
@@ -96,16 +112,37 @@ body {
     border-color: #3e4095;
 }
 
-.hero-text p {
-	color: rgba(238, 238, 238, 0.84);
-	padding-top: 15px;
-	padding-right: 50px;
-	font-size: 1.4em;
+.hero-text{
+	padding-left: 50px;
+	padding-top: 20px;
+}
+
+.main-header {
+	padding-left: 15px;
+	margin-right: 300px;
+	background-color: #0006;
+	color: #ffffffe6;
+}
+
+.sub-header {
+	padding-left: 15px;
+	margin-right: 346px;
+	background-color: #F5EEEEB3;
+	color: #111010;
+	margin-top: -10px;
+}
+
+.hero-text .main-header h3 {
+	padding: 5px 5px;
 }
 
 .header h4 {
 	margin-top: 40px;
 	color: #000;
+}
+
+.hd-top h4 {
+	margin-top: 20px;
 }
 
 .container-price-table {
@@ -125,9 +162,7 @@ body {
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
-    height: 355px;
 }
-
 
 .padding {
 	padding-top: 20px;
@@ -136,12 +171,52 @@ body {
 	padding-right: 10px;
 }
 
+.padding h4 {
+	color: #000C;
+	
+}
+
 .plans > p > span {
 	align-content: right;
 }
 
 .float {
 	float: right;
+}
+
+.people {
+	margin-bottom: 40px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+}
+
+.people-box {
+	background-color: #f5f5f5;
+	padding: 5px 5px;
+	margin-top: 10px;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
+}
+
+.people-ad {
+	background-color: #443f3f;
+	padding: 10px 10px;
+	margin-top: 10px;
+}
+
+.ad-area {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.badge-info {
+  background-color: #3a87ad;
+}
+
+.badge-info:hover {
+  background-color: #2d6987;
 }
 
 /* Advertise */
@@ -273,7 +348,12 @@ body {
 	}
 	.hero-bg {
 		padding-top: 30px;
-		height: 150px;
+		height: 250px;
+	}
+	.ads {
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    margin-top: -68px;
 	}
 	.hero-btn .btn-mobile {
 	    color: #333;

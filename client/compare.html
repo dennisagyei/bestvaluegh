@@ -1,224 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bestvaluegh-compare...</title>
-
-    <!-- Place favicon.ico and apple-touch-icon.png -->
-    <link rel="shortcut icon" href="">
-
-    <!-- Font-awesome -->
-    <link href="assets/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="assets/css/styles.css" rel="stylesheet">
-    
-    
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body style="background-color: #eee;">
-
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="img/bestvalue-logo-top.png"></a>
+<section id="page" class="container-fluid">
+    <div class="row" ng-controller="MainCtrl">
+        <div class="col-sm-8">
+        <div class="inner-side shadow">
+            <h4>Compare {{ kpis.kpi_name }}</h4>
         </div>
-        <div id="navbar" class="navbar-collapse collapse navbar-right">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="#compare">Compare</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="subscribe.html">Subscribe</a></li>
-            <li><a href="faq.html">FAQs</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-
-    <div class="container container-compare">
-      <div class="row">   
-        <div class="col-md-8 col-xs-12 price-table">
-
-          <div class="rate-header">
-            <span class="header"><h4>View Rates-Click on rate to compare...</h4></span>
-          </div>
-
-          <div class="col-md-4 col-xs-12 animate-box" id="box1">
-            <div class="price-box-compare">
-              <img src="img/Internet-bank.jpg" class="img-responsive">
-              <div class="padding">
-                <h4 class="pricing-plan">Internet Banking</h4>
-                <hr>
-                <div class="plans entry-content">
-                  <div class="prices clearfix">
-                    <div class="procent">
-                      GHs10
+        <div class="row">
+    
+            <div class="col-xs-18 col-sm-6 col-md-3" ng-repeat="metric in metrics">
+                <div class="dl deal-entry">
+                    <div class="brand"><h3>{{ metric.company }}</h3></div>
+                    <div class="discount midnight-blue">{{ metric.rate | custNumFormat : metric.unit }}</div>
+                    
+                    <div class="coupon">
+                         <div class="rating">
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                        </div>
                     </div>
-                    <div class="price">
-                      GHs10
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div>
-                      <p><span class="label label-danger low-margin" id="lowRate_internet">Lowest Rate</span></p>
-                    </div>
-                    <div>
-                      <p><span class="label label-success high-margin" id="highRate_internet">Highest Rate</span></p>
-                    </div>
-                  </div>
-                  <footer class="info_bar clearfix">
-                    <a href=""><button class="btn btn-block btn-raised btn-sm btn-primary btn-blue">COMPARE RATES</button></a>
-                  </footer>
-                </div>   
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-xs-12 animate-box" id="box2">
-            <div class="price-box-compare">
-              <img src="img/bank_rates.jpg" class="img-responsive">
-              <div class="padding">
-                <h4 class="pricing-plan">Interest Rate</h4>
-                <hr>
-                <div class="plans entry-content">
-                  <div class="prices clearfix">
-                    <div class="procent">
-                      29%
-                    </div>
-                    <div class="price">
-                      32%
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div>
-                      <p><span class="label label-danger low-margin" id="lowRate_interest">Lowest Rate</span></p>
-                    </div>
-                    <div>
-                      <p><span class="label label-success high-margin" id="highRate_interest">Highest Rate</span></p>
-                    </div>
-                  </div>
-                  <footer class="info_bar clearfix">
-                    <a href=""><button class="btn btn-block btn-raised btn-sm btn-primary btn-blue">COMPARE RATES</button></a>
-                  </footer>
+                        <div style="padding-right: 10px;" class="pull-right">
+                              <span class="ti-thumb-up"></span>
+                              <span class="ti-thumb-down"></span>
+                        </div>
+                    
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="col-md-4 col-xs-12 animate-box" id="box3">
-            <div class="price-box-compare">
-              <img src="img/banking_mobile.jpg" class="img-responsive">
-              <div class="padding">
-                <h4 class="pricing-plan">Mobile Banking Fee</h4>
-                <hr>
-                <div class="plans entry-content">
-                  <div class="prices clearfix">
-                    <div class="procent">
-                      GHs10
-                    </div>
-                    <div class="price">
-                      GHs13
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div>
-                      <p><span class="label label-danger low-margin" id="lowRate_mobile">Lowest Rate</span></p>
-                    </div>
-                    <div>
-                      <p><span class="label label-success high-margin" id="highRate_mobile">Highest Rate</span></p>
-                    </div>
-                  </div>
-                  <footer class="info_bar clearfix">
-                    <a href=""><button class="btn btn-block btn-raised btn-sm btn-primary btn-blue">COMPARE RATES</button></a>
-                  </footer>
+
+
+        
+  </div><!--/row-->
+                
+    <!--Commentes -->
+                   <!-- /inner -->
+
                 </div>
-              </div>
-            </div>
-          </div>
+                <!-- /.col-sm-8 .content -->
+                <div class="col-sm-4 sidebar">
+                    <div class="inner-side shadow">
+                        <div class="widget widget-add">
+                            <hr data-symbol="BEST VALUE -{{ kpis.kpi_name }}">
+                                <div class="price col-xs-12 text-center" ng-repeat="bval in best_val">
+                                    <h2 class="rating-num">{{ bval._id.kpi_type=='Ghs' ? bval.kpi_min : bval.kpi_max | custNumFormat : bval._id.kpi_type}}</h2>
+                                    
+									<div class="rating">
+									    <i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+										<i class="ti-star"></i>
+									</div>
+									<div><i class="fa fa-trophy" aria-hidden="true"></i> Best Value</div>
+                                </div>
+                                <div class="dealAttributes" ng-repeat="bval in best_val">
+			                          <div class="valueInfo bg-light shadow">
+			                            <div class="value">
+			                              <p class="value"> {{ bval.kpi_min | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">Min</p>
+			                            </div>
+			                            <div class="discount">
+			                              <p class="value">{{ bval.kpi_avg | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">Average</p>
+			                            </div>
+			                            <div class="save">
+			                              <p class="value">{{ bval.kpi_max | custNumFormat : bval._id.kpi_type }}</p>
+			                              <p class="text">HIGHEST</p>
+			                            </div>
+			                     </div>
+                        </div>
+                        <!-- /widget -->
+                        <div class="widget widget-add">
+                            <hr data-symbol="COMMENTS">
+                             <div class="fb-comments" data-href="https://bestvaluegh-dennisagyei.c9users.io" data-width="220" data-numposts="5">
+                             </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /col 4 - sidebar -->
         </div>
-
-
-        <div class="col-md-4 col-xs-12 advert-compare">
-          <span class="advert-header"><h4>ADVERTISE</h4></span>
-          <hr>
-          <img src="img/side-banner2.jpg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-
-
-
-    <footer id="bestValue-footer" role="contentinfo">
-  
-      <div class="container footer-margin">
-        <div class="col-md-4 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 links">
-          <span class="foot-header"><h5>About Us</h5></span>
-          <img src="img/bestvalue-logo-top.png" class="img-responsive">
-          <p>
-            We provide the latest industry charges and rates to help you get the best value on the market and make informed decisions.
-          </p>
-        </div>
-        <div class="col-md-3 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 links">
-          <span class="foot-header"><h5>Common Rates</h5></span>
-          <ul class="rates">
-            <li><a href="#">Internet Banking</i></a></li>
-            <li><a href="#">ATM Usage Fees</a></li>
-            <li><a href="#">Interest Rates</a></li>
-            <li><a href="#">Fixed Deposit Rates</a></li>
-          </ul>
-          
-        </div>
-        <div class="col-md-2 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 links">
-          <span class="foot-header"><h5>Categories</h5></span>
-          <ul class="rates">
-            <li><a href="#">Banking</i></a></li>
-            <li><a href="#">Insurance</a></li>
-            <li><a href="#">Telecoms</a></li>
-          </ul>
-          
-        </div>
-
-        <div class="col-md-2 col-md-push-1 col-sm-12 col-sm-push-0 col-xs-12 col-xs-push-0 links">
-          <span class="foot-header"><h5>Follow Us</h5></span>
-          <ul class="bestValue-social">
-            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-          </ul>
-        </div>
-        
-        
-        <div class="col-md-12 bestValue-copyright text-center">
-          <p>&copy; 2016 <span style="color: #080808";>Bestvaluegh.com</span>. All Rights Reserved. </p>  
-        </div>
-        
-      </div>
-    </footer>
-   
-    
-    
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="assets/js/jquery-3.1.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="assets/js/bootstrap.min.js"></script>
-
-  </body>
-</html>
+    </div>  <!-- Row End -->
+</section>

@@ -19,6 +19,9 @@
                       <li>
                         <a href="#"><i class="ti-shine"></i>User Accounts</a>
                       </li>
+                      <li>
+                        <a href="" ng-click="Logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>Admin Logout</a>
+                      </li>
                     </ul>
                     <!-- Sidebar divider -->
                 </div>
@@ -102,8 +105,8 @@
                                 <label class="control-label col-sm-2" for="category">Category:</label>
                                 <div class="col-sm-4">
                                     <select class="form-control" id="category" name="category" ng-model="new_kpi.category" required>
-                                        <option value="Banking" selected>Banking
-                                        <option value="Fuel">Fuel
+                                        <option value="Commercial Banks" selected>Commercial Banks
+                                        <option value="Non-Bank Institutions">Non-Bank Institutions
                                     </select>
                                     <span style="color:red" ng-show="KpiForm.category.$dirty && KpiForm.category.$invalid">
                                     <span ng-show="KpiForm.category.$error.required">Category is required.</span>
@@ -123,20 +126,25 @@
                               </div>
                               
                               <div class="form-group">
-                                
+                                <label class="control-label col-sm-2" for="sub_category">Sub Category:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="sub_category" name="sub_category" ng-model="new_kpi.sub_category" required>
+                                        <option value="Current" selected>Current Account
+                                        <option value="Savings">Savings Account
+                                        <option value="Hybrid">Hybrid Account
+                                        <option value="Loans">Loans
+                                        <option value="Investments">Investments
+                                    </select>
+                                    <span style="color:red" ng-show="KpiForm.sub_category.$dirty && KpiForm.sub_category.$invalid">
+                                    <span ng-show="KpiForm.sub_category.$error.required">sub category is required.</span>
+                                    </span>
+                                </div>
                               </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="description">Description:</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="description" name="description" ng-model="new_kpi.description">
-                                </div>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="ref_url">Ref. Url:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="new_kpi.ref_url">
                                 </div>
                               </div>
                               
@@ -218,8 +226,8 @@
                                 <div class="col-sm-4">
                                   
                                     <select class="form-control" id="category" name="category" ng-model="edit_kpi.category" required>
-                                        <option value="Banking">Banking
-                                        <option value="Fuel">Fuel
+                                        <option value="Commercial Banks" selected>Commercial Banks
+                                        <option value="Non-Bank Institutions">Non-Bank Institutions
                                     </select>
                                 </div>
                                 
@@ -232,18 +240,26 @@
                                 </div>
                               </div>
                               
+                              <div class="form-group">
+                                <label class="control-label col-sm-2" for="sub_category">Sub Category:</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="sub_category" name="sub_category" ng-model="edit_kpi.sub_category" required>
+                                        <option value="Current" selected>Current Account
+                                        <option value="Savings">Savings Account
+                                        <option value="Hybrid">Hybrid Account
+                                        <option value="Loans">Loans
+                                        <option value="Investments">Investments
+                                    </select>
+                                    <span style="color:red" ng-show="KpiForm.sub_category.$dirty && KpiForm.sub_category.$invalid">
+                                    <span ng-show="KpiForm.sub_category.$error.required">sub category is required.</span>
+                                    </span>
+                                </div>
+                              </div>
                               
                               <div class="form-group">
                                 <label class="control-label col-sm-2" for="description">Description:</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="description" name="description" ng-model="edit_kpi.description">
-                                </div>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" for="ref_url">Ref. Url:</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="ref_url" name="ref_url" ng-model="edit_kpi.ref_url">
                                 </div>
                               </div>
                               

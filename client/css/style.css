@@ -495,10 +495,10 @@ object {
 .navbar.nav-white .navbar-nav>li>a {
     color: #000;
     background-color: #fff;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 12px;
+    padding-bottom: 8px;
     font-family: Montserrat, Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 1px
@@ -2525,4 +2525,10 @@ ul.thumbnails {
     padding: 10px 15px;
     color: #f1c40f;
     background: #f0f0f0;
+}
+
+.navbar-default {
+    background-color: #ffffff;
+    border-color: #141569;
+    margin-top: -5px;
 }

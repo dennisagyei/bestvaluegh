@@ -3,7 +3,7 @@
 
   * Project Name: Bestvaluegh
   * Author: Zak (www.sleekjob.com)
-  * Date: 20-12-16
+  * Date: 29-12-16
 
 ///////////////////////////////////////////////
 -->
@@ -36,7 +36,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body id="index">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -52,8 +52,19 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="compare.html">Compare</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compare <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="compare.html">Compare Rates</a></li>
+                <li><a href="#">Investment</a></li>
+                <li><a href="#">Current Accounts</a></li>
+                <li><a href="#">Savings Accounts</a></li>
+                <li><a href="#">Hybrid Accounts</a></li>
+                <li><a href="#">Licensed Institutions</a></li>
+                <li><a href="#">Loans</a></li>
+              </ul>
+            </li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="subscribe.html">Subscribe</a></li>
             <li><a href="faq.html">FAQs</a></li>
@@ -63,114 +74,317 @@
     </nav>
 
 
-    <div class="container-fluid hero-bg" style="background-image: url(img/business-home-page-banner.jpg);">
-      <div class="row">
-        <div class="col-md-6 col-xs-hidden">
-          
+    <div class="container-fluid">
+      <div class="row"> 
+        <!-- Set Hero image here using inline CSS --> 
+        <div class="col-md-9 col-xs-12 hero-bg" style="background-image: url(img/business-home-page-banner.jpg);">
+          <div class="hero-text">
+            <div class="main-header hidden-xs"> 
+              <p>
+                <h3>The One Stop For All Bank Rates And Charges</h3>
+              </p>
+            </div>
+            <div class="sub-header hidden-xs">
+              <p>
+                Looking for a place to invest or open a bank account, worry no more!
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6 col-xs-12">
-          <span class="hero-img hidden-sm"><img src="img/bestvalue-logo-white.png" class="img-responsive banner-logo"></span>
-          <span class="hero-text hidden-xs hidden-sm">
-            <p>
-              We provide the latest industry charges and rates to help you get the best value on the market and make informed decisions.
-            </p>
-          </span>
-          <span class="hero-btn hidden-sm">
-            <a href="subscribe.html">
-              <button class="btn btn-default btn-sm btn-mobile">Subscribe</button>
-            </a>
-          </span>
+        <!-- Advert Section here -->
+        <div class="col-md-3 col-xs-12 ads">
+          <div class="advert-section">
+            <img src="img/side-banner2.jpg" class="img-responsive ad-img">
+            <img src="img/side-banner2.jpg" class="img-responsive ad-img">
+          </div>
         </div>
       </div>
     </div>
 
 
-
+    <!-- Commercial Banks Rates and Charges -->
     <div class="container container-price-table">
       <div class="row">   
-        <div class="col-md-8 col-xs-12 price-table">
+        <div class="col-md-12 col-xs-12 price-table">
 
           <div class="container">
             <div class="row">
               <div class="col-md-12">
-                <span class="header"><h4>COMPARE RATES FROM BANKS</h4></span>
+                <span class="header hd-top"><h4>COMMERCIAL BANKS RATES AND CHARGES</h4></span>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4 col-xs-12 animate-box" id="box1">
+          <div class="col-md-3 col-xs-12 animate-box" id="box1">
             <div class="price-box price-box-mobi">
               <img src="img/Internet-bank.jpg" class="img-responsive">
               <div class="padding">
-                <h4 class="pricing-plan">Internet Banking</h4>
+                <h4 class="pricing-plan">Top 5 investment rates</h4>
                 <hr>
                 <div class="plans">
                   <p>
-                    <a href="#" class="btn btn-default btn-xs">UT Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="ut_internet">GHs10</span>
+                    <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="label label-primary float" id="barclays_interestRate">32%</span>
+                  </p>
                   <p>
+                    <a href="#" class="btn btn-default btn-xs">Zenith Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="label label-primary float" id="zenith_interestRate">29%</span>
+                  </p>
+                  <p>
+                    <a href="#" class="btn btn-default btn-xs">Ecobank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="label label-primary float" id="ecobank_interestRate">30%</span>
+                  </p>
                 </div>   
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-xs-12 animate-box" id="box2">
+
+          <div class="col-md-3 col-xs-12 animate-box" id="box2">
             <div class="price-box price-box-mobi">
               <img src="img/bank_rates.jpg" class="img-responsive">
               <div class="padding">
-                <h4 class="pricing-plan">Interest Rate</h4>
+                <h4 class="pricing-plan">Savings account top picks</h4>
                 <hr>
                 <div class="plans">
                   <p>
                     <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="barclays_interestRate">32%</span>
-                  <p>
+                    <span class="badge badge-info float" id="barclays_interestRate">32%</span>
+                  </p>
                   <p>
                     <a href="#" class="btn btn-default btn-xs">Zenith Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="zenith_interestRate">29%</span>
-                  <p>
+                    <span class="badge badge-info float" id="zenith_interestRate">29%</span>
+                  </p>
                   <p>
                     <a href="#" class="btn btn-default btn-xs">Ecobank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="ecobank_interestRate">30%</span>
-                  <p>
+                    <span class="badge badge-info float" id="ecobank_interestRate">30%</span>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-xs-12 animate-box" id="box3">
+
+          <div class="col-md-3 col-xs-12 animate-box" id="box3">
             <div class="price-box price-box-mobi">
               <img src="img/banking_mobile.jpg" class="img-responsive">
               <div class="padding">
-                <h4 class="pricing-plan">Mobile Banking Fee</h4>
+                <h4 class="pricing-plan">Individual current account charges</h4>
                 <hr>
                 <div class="plans">
                   <p>
                     <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="zenith_interestRate">GHs10</span>
-                  <p>
+                    <span class="badge badge-info float" id="zenith_interestRate">GHs10</span>
+                  </p>
                   <p>
                     <a href="#" class="btn btn-default btn-xs">Fidelity Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="ecobank_interestRate">GHs12</span>
-                  <p>
+                    <span class="badge badge-info float" id="ecobank_interestRate">GHs12</span>
+                  </p>
                   <p>
                     <a href="#" class="btn btn-default btn-xs">GN Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="badge float" id="barclays_interestRate">GHs13</span>
-                  <p>
+                    <span class="badge badge-info float" id="barclays_interestRate">GHs13</span>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
+          <div class="col-md-3 col-xs-12 animate-box" id="box4">
+            <div class="price-box price-box-mobi">
+              <img src="img/banking_mobile.jpg" class="img-responsive">
+              <div class="padding">
+                <h4 class="pricing-plan">Corporate current account charges</h4>
+                <hr>
+                <div class="plans">
+                  <p>
+                    <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="badge badge-info float" id="zenith_interestRate">GHs10</span>
+                  </p>
+                  <p>
+                    <a href="#" class="btn btn-default btn-xs">Fidelity Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="badge badge-info float" id="ecobank_interestRate">GHs12</span>
+                  </p>
+                  <p>
+                    <a href="#" class="btn btn-default btn-xs">GN Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <span class="badge badge-info float" id="barclays_interestRate">GHs13</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="col-md-4 col-xs-12 advert">
-          <span class="advert-header"><h4>ADVERTISE</h4></span>
-          <hr>
-          <img src="img/side-banner2.jpg" class="img-responsive">
         </div>
       </div>
     </div>
 
 
+    <!-- Non Bank Financial Institutions and Charges -->
+    <div class="container-fluid" style="background-color: #eee;">
+      <div class="container container-price-table">
+        <div class="row">   
+          <div class="col-md-12 col-xs-12 price-table">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="header"><h4>NON BANK FINANCIAL INSTITUTIONS RATES AND CHARGES</h4></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 animate-box" id="box1">
+              <div class="price-box price-box-mobi">
+                <img src="img/Internet-bank.jpg" class="img-responsive">
+                <div class="padding">
+                  <h4 class="pricing-plan">Top 5 investment rates</h4>
+                  <hr>
+                  <div class="plans">
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="barclays_interestRate">32%</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Zenith Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="zenith_interestRate">29%</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Ecobank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="ecobank_interestRate">30%</span>
+                    </p>
+                  </div>   
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 animate-box" id="box2">
+              <div class="price-box price-box-mobi">
+                <img src="img/bank_rates.jpg" class="img-responsive">
+                <div class="padding">
+                  <h4 class="pricing-plan">Savings account top picks</h4>
+                  <hr>
+                  <div class="plans">
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="barclays_interestRate">32%</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Zenith Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="zenith_interestRate">29%</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Ecobank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="ecobank_interestRate">30%</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 animate-box" id="box3">
+              <div class="price-box price-box-mobi">
+                <img src="img/banking_mobile.jpg" class="img-responsive">
+                <div class="padding">
+                  <h4 class="pricing-plan">Individual current account charges</h4>
+                  <hr>
+                  <div class="plans">
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="zenith_interestRate">GHs10</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Fidelity Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="ecobank_interestRate">GHs12</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">GN Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="barclays_interestRate">GHs13</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 animate-box" id="box4">
+              <div class="price-box price-box-mobi">
+                <img src="img/banking_mobile.jpg" class="img-responsive">
+                <div class="padding">
+                  <h4 class="pricing-plan">Corporate current account charges</h4>
+                  <hr>
+                  <div class="plans">
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Barclays Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="zenith_interestRate">GHs10</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">Fidelity Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="ecobank_interestRate">GHs12</span>
+                    </p>
+                    <p>
+                      <a href="#" class="btn btn-default btn-xs">GN Bank <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <span class="badge badge-info float" id="barclays_interestRate">GHs13</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- What People Are Saying -->
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <span class="header"><h4>WHAT PEOPLE ARE SAYING</h4></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9 col-xs-12">
+          <div class="col-md-6 col-xs-12 people">
+            <div class="people-box">
+              <img src="img/stock.jpg" class="img-responsive">
+              <div class="padding">
+                <h4 class="pricing-plan">Rate your bank</h4>
+                <hr>
+                <div class="plans">
+                  <p>
+                    Lorem ipsum dolor sit amet, his impedit voluptatibus te, at sed intellegat reprehendunt, te summo alterum reprimique est. Viderer deserunt ut eos. Qui at nullam legimus appareat, pro porro zril omittantur at. 
+                  </p>
+                </div>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-6 col-xs-12 people">
+            <div class="people-box">
+              <img src="img/stock.jpg" class="img-responsive">
+              <div class="padding">
+                <h4 class="pricing-plan">Remittances and bank payments</h4>
+                <hr>
+                <div class="plans">
+                  <p>
+                    Lorem ipsum dolor sit amet, his impedit voluptatibus te, at sed intellegat reprehendunt, te summo alterum reprimique est. Viderer deserunt ut eos. Qui at nullam legimus appareat, pro porro zril omittantur at.  
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ad Section -->
+        <div class="col-md-3 col-xs-12 ad-area">
+          <div class="people-ad">
+            <img src="img/mockup.jpg" class="img-responsive">
+            <img src="img/mockup.jpg" class="img-responsive">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Featured Partners -->
     <div class="container-fluid container-partners">
       <div class="container">
         <div class="row">

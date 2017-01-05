@@ -5,6 +5,7 @@ var KpiSchema = new mongoose.Schema({
   kpi_type: { type: String }, //Currency/Percentage
   kpi_image: { type: String }, //KPI image
   category: { type: String, index: true },  //field level index
+  sub_category: { type: String },
   description: { type: String },
   ref_url: { type: String },
   featured : { type: String },
