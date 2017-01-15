@@ -1,0 +1,46 @@
+<section id="page" class="container-fluid">
+	<div class="row" ng-controller="SignupCtrl">
+    <div class="col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3">
+      <div class="inner-side shadow">   
+        <h3 class='text-center'>User Registration</h3>
+        <p></p>
+        <div class="alert alert-success alert-dismissible" ng-show="success_msg" ng-bind="success_msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <div class="alert alert-danger alert-dismissible" ng-show="error_msg" ng-bind="error_msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+                                          
+                        
+                        
+        <form class="form-horizontal  alert alert-default" role="form" name="SignupForm" ng-submit="Register(Signup)">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Username:</label>
+                <input type="text" class="form-control" id="name" name="name" ng-model="Signup.name" required>
+            </div>
+                              
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" ng-model="Signup.password" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="re_password">Repeat Password:</label>
+                <input type="password" class="form-control" id="re_password" name="re_password" ng-model="Signup.re_password" required>
+            </div>
+                              
+            <div class="form-group pull-right">
+                <button type="reset" class="btn btn-danger" >Cancel</button>
+                <button type="submit" class="btn btn-primary" >Sign up</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div><!-- /.row -->
+    
+    <section id="page" class="container">
+        <div class="shadow bg-white mTop-30 frameLR">
+         </div>
+    </section>
+</section>
+      

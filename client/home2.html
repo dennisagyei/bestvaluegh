@@ -16,11 +16,10 @@
 	                  <!-- /.image -->
 	                  <div class="title"><a href="/compare/{{ x._id.kpi_id}}" >{{ x._id.kpi_name }}</a></div>
 	                  	<div class="row">
-	                  		<ul class="col-md-8">
-			              			<li style="margin-left:10px;"><a href="#" class="tag" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3">{{ metric.company }}</a></li>
-			        		</ul>
-			        		<ul class="col-md-4">
-			              			<li style="margin: 0 14px 14px 0;" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3"><span class="label label-primary">{{ metric.rate | custNumFormat : metric.unit }}</span></li>
+	                  		<ul class="col-md-11">
+			              		<li style="margin-left:10px;">
+				            		<a href="#" class="tag btn-block" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3">{{ metric.company }} <span class="badge label-primary pull-right" >{{ metric.rate | custNumFormat : metric.unit }}</span></a>
+				            	</li>
 			        		</ul>
 	        		  	</div>
 	        		</div>
@@ -42,12 +41,12 @@
 	                	<!-- /.image -->
 		                <div class="title"><a href="/compare/{{ x._id.kpi_id}}" >{{ x._id.kpi_name }}</a></div>
 		                <div class="row">
-		                	<ul class="col-md-8">
-				            	<li style="margin-left:10px;"><a href="#" class="tag" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3">{{ metric.company }}</a></li>
+		                	<ul class="col-md-11">
+				            	<li style="margin-left:10px;">
+				            		<a href="#" class="tag btn-block" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3">{{ metric.company }} <span class="badge label-primary pull-right" >{{ metric.rate | custNumFormat : metric.unit }}</span></a>
+				            	</li>
 				        	</ul>
-				        	<ul class="col-md-4">
-				            	<li style="margin: 0 14px 14px 0;" ng-repeat="metric in kpi_metrics | orderBy : 'rate' | filter : x._id.kpi_name | limitTo : 3"><span class="label label-primary">{{ metric.rate | custNumFormat : metric.unit }}</span></li>
-				        	</ul>
+				        	
 		        		</div>
 				    </div>
 	            </div>
@@ -55,7 +54,32 @@
 			</div>
 			
 		</div>
-	
+		
+		<!--/.WHAT PEOPLE ARE SAYING -->
+			<div class="mTop-30">	
+	            <div class="row">
+	              <div class="col-sm-12 clearfix">
+	                <div class="hr-link">
+	                  <hr class="mBtm-50" data-symbol="WHAT PEOPLE ARE SAYING....">
+	                </div>
+	              </div>
+	            </div>
+	            
+            <div class="col-md-4">
+            	<section class="testimonial deal-entry" aria-label="testimonal">
+					<div class="row">
+					    <div class="col-md-4">
+						      <img class="img-responsive img-circle" src="images/headshot.jpg" width="100" height="100">
+					    </div>
+					    <div class="col-md-8">
+					    	<blockquote aria-label="testimonial comment">Bestvaluegh help me make the best financial decisions.
+						      <cite aria-label="author of testimonial">- Dennis,Accra</cite>
+						    </blockquote>
+					    </div>
+					</div>
+				</section>
+			</div>
+			
 	        <div class="mTop-30">
 			            <div class="row">
 			              <div class="col-sm-12 clearfix">

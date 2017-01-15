@@ -12,7 +12,9 @@ app.config(function($routeProvider,$locationProvider){
     $routeProvider.when('/contact',{ templateUrl : "contact.html"});
     $routeProvider.when('/compare/:id',{ templateUrl : "compare.html" , controller : 'MainCtrl'});
     $routeProvider.when('/category/:id',{ templateUrl : "category.html" , controller: "CatgCtrl"});
+    $routeProvider.when('/register',{ templateUrl : "registration.html" , controller: 'RegisterCtrl'});
     $routeProvider.when('/admin',{ templateUrl : "login.html" , controller: 'LoginCtrl'});
+    $routeProvider.when('/admin/signup',{ templateUrl : "signup.html" , controller: 'SignupCtrl'});
     $routeProvider.when('/admin/company',{ templateUrl : "company.html" , controller: 'CompanyCtrl'});
     $routeProvider.when('/admin/kpi',{ templateUrl : "kpi.html" , controller: 'KpiCtrl'});
     $routeProvider.when('/admin/rates',{ templateUrl : "rates.html" , controller: 'RatesCtrl'});
@@ -264,6 +266,47 @@ app.controller("LoginCtrl",function($scope, $timeout, $http, $location, $routePa
         });
     }
 })
+
+
+app.controller("RegisterCtrl",function($scope, $timeout, $http, $location, $routeParams, $cookies) {
+
+});
+
+
+app.controller("SignupCtrl",function($scope, $timeout, $http, $location, $routeParams, $cookies) {
+    
+    $scope.Register = function (data) {
+        
+        //console.log(data);
+        
+        if (data.password!=data.re_password){
+            $scope.error_msg = 'Passwords do not match.';
+            return;
+        }
+                    
+        
+        
+        $http.post('/api/register', data)
+        .success(function(response) {
+            //console.log(response);
+            if (response.success==true)
+            {
+                $location.path('/admin');
+            } else 
+            {
+                 $scope.error_msg = 'Wrong entry.please try again';
+                 $timeout(function () {
+                    $scope.error_msg = '';
+                }, 4000);
+            }
+        })
+        .error(function(error) {
+          // Show server error message
+          $scope.error_msg = error.msg;
+          
+        });
+    }
+});
 
 app.controller("CompanyCtrl",function($scope,$cookies,$http,$routeParams,companyFactory,$location,FileUploader){
     $scope.uploader = new FileUploader({ url: '/api/upload',alias: 'logo',queueLimit : 1  });

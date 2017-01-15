@@ -1449,6 +1449,17 @@ label {
     -webkit-transition: all .4s
 }
 
+.new_tag {
+    background: #F3F3F3; 
+    font-size: 14px;
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: left;
+    margin: 0 10px 10px 0;
+    padding: 0 20px 0 23px;
+}
+
 .tag:before {
     position: absolute;
     top: 10px;
@@ -2531,4 +2542,43 @@ ul.thumbnails {
     background-color: #ffffff;
     border-color: #141569;
     margin-top: -5px;
+}
+
+.testimonial {
+    background-color: #ffffff;
+	padding: 30px 15px 30px 30px;
+	border-style: solid;
+	border-width:5px 1px 1px;
+	margin:15px 0;
+    border-color: #5677FC #ddd #ddd;
+}
+
+.testimonial img {
+    border: 1px solid #ddd;
+    margin: auto auto 15px;
+    width: 100%;
+}
+
+.testimonial blockquote {
+    font-family: "source sans pro";
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.testimonial blockquote:before {
+	    color: #ccc;
+	    content: open-quote;
+	    font-size: 5em;
+	    line-height: 0em;
+	    margin-right: 0.1em;
+	    vertical-align: -0.4em;
+}
+
+.testimonial blockquote:after {
+		content: close-quote;
+		visibility:hidden;
+}
+
+.col-md-3 .testimonial {
+    padding: 30px;
 }
