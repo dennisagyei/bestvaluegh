@@ -5,8 +5,6 @@ var app = angular.module('app', ['ngRoute','ngCookies','ngResource','angular-fle
 app.config(function($routeProvider,$locationProvider){
 
     $routeProvider.when('/',{ templateUrl : "home2.html" , controller : 'HomeCtrl'});
-    $routeProvider.when('/new',{ templateUrl : "home4.html"});
-    $routeProvider.when('/home3',{ templateUrl : "home3.html" , controller : 'HomeCtrl'});
     $routeProvider.when('/subscribe',{ templateUrl : "subscribe.html"});
     $routeProvider.when('/faq',{ templateUrl : "faq.html"});
     $routeProvider.when('/contact',{ templateUrl : "contact.html"});
